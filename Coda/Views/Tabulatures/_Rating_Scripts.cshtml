@@ -1,0 +1,20 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+        $(document).ajaxComplete(function () {
+            alert("hello");
+            $('input.check').on('change', function () {
+                alert('Rating: ' + $(this).val());
+            });
+            $('.rating').click(function() {
+                alert("hello");
+            });
+            $('.rating').rating('rate', $(@Model.AverageRating).val());
+
+            $('.rating').click(function () {
+                alert($('.rating').rating('rate'));
+            });
+            $('.rating').on('change', function () {
+                $(this).next('.label').text($(this).val());
+            });
+        });
+</script>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Coda.Models.Artist>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+@for (int y = 0; y < 27; y++)
+{
+    char filter = Convert.ToChar(65 + y);
+    string letter = filter.ToString();
+
+    if (y == 27)
+    {
+        letter = "All";
+    }
+
+    @Html.ActionLink(letter, "Index", new { letter = letter });
+}
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Edit", "Edit", new {id = item.Id})
+                @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+            }
+            @Html.ActionLink("Songs", "Index", "Songs", new { id = item.Id }, null)
+        </td>
+    </tr>
+}
+
+</table>

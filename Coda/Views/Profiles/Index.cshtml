@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Coda.Models.MemberProfile>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassicRock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PunkRock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Grunge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Metal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Blues)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RAndB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Alternative)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConnectWithOtherMembers)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClassicRock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PunkRock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Grunge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Metal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Blues)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RAndB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alternative)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConnectWithOtherMembers)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

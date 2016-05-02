@@ -1,0 +1,114 @@
+﻿@model Coda.Models.MemberProfile
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MemberProfile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClassicRock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassicRock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PunkRock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PunkRock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Grunge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Grunge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Metal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Metal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Blues)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Blues)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RAndB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RAndB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alternative)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alternative)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConnectWithOtherMembers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConnectWithOtherMembers)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
