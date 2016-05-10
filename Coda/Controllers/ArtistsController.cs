@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Coda.Models;
+using Coda.Models.Repository;
 
 namespace Coda.Controllers
 {
@@ -130,5 +131,25 @@ namespace Coda.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult SearchArtists(string searchString)
+        {
+            ArtistRepository rep = new ArtistRepository();
+
+            return View(rep.GetByName(searchString));
+        }
+        //public ActionResult Search(string searchString)
+        //{
+        //    var v = (from a in db.Artists
+        //                 join b in db.Songs on a.Id equals b.ArtistId into bb
+        //                 from b in bb.DefaultIfEmpty()
+        //                 group new { a, b } by new { a.Id, a.Name } into AA
+        //                 select new
+        //                 {
+        //                     AA.Key.Id,
+        //                     AA.Key.Name,
+        //                  });
+        //    return View(v);
+        //}
+
     }
 }

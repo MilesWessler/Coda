@@ -1,0 +1,23 @@
+﻿@model Coda.Models.Tablature
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div>
+    <dl class="dl-horizontal">
+       <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFormattedData(Model.Content)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

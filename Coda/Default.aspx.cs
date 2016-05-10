@@ -22,11 +22,11 @@ namespace Coda
         }
         private void PopulateArticle()
         {
-            using (ApplicationDbContext dc = new ApplicationDbContext())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 
-                var v = (from a in dc.Songs
-                         join b in dc.SongScores on a.Id equals b.SongId into bb
+                var v = (from a in db.Songs
+                         join b in db.SongScores on a.Id equals b.SongId into bb
                          from b in bb.DefaultIfEmpty()
                          group new { a, b } by new { a.Id, a.Name } into AA
                          select new

@@ -30,8 +30,9 @@ namespace Coda.Models
         public DbSet<Song> Songs { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<MemberProfile> MemberProfiles { get; set; }
-        public DbSet<Tabulature> Tabulatures { get; set; }
+        public DbSet<Tablature> Tabulatures { get; set; }
         public DbSet<SongScore> SongScores { get; set; }
+        public DbSet<RateLog> RateLogs { get; set; }
     
        
      

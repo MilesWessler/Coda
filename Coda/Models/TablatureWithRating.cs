@@ -5,10 +5,10 @@ using System.Web;
 
 namespace Coda.Models
 {
-    public class TablatureRating
+    public class TablatureWithRating
     {
-        public int Id { get; set; }
-        public int TabulatureId { get; set; }
+        public int TablatureId { get; set; }
+        public string Title { get; set; }
         public int Rating { get; set; }
     }
 }

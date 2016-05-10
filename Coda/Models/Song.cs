@@ -9,7 +9,7 @@ namespace Coda.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual List<Tabulature> Tabulature  { get; set; }
+        public virtual List<Tablature> Tablatures { get; set; }
         public int ArtistId { get; set; }
         public virtual Artist Artist { get; set; }
     }

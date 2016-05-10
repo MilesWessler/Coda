@@ -48,10 +48,6 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="BootstrapRating, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\bootstrap-rating.mvc.1.0.0\lib\net452\BootstrapRating.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -197,6 +193,7 @@
     <Compile Include="Controllers\CreateUserRolesController.cs" />
     <Compile Include="Controllers\MemberProfiles1Controller.cs" />
     <Compile Include="Controllers\RatingController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -217,7 +214,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SongsController.cs" />
-    <Compile Include="Controllers\TabulaturesController.cs" />
+    <Compile Include="Controllers\TablaturesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -227,36 +224,44 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MemberProfile.cs" />
+    <Compile Include="Models\RateLog.cs" />
+    <Compile Include="Models\Repository\ArtistRepository.cs" />
     <Compile Include="Models\Repository\Repository.cs" />
     <Compile Include="Models\Repository\SongRepository.cs" />
     <Compile Include="Models\Song.cs" />
     <Compile Include="Models\SongScore.cs" />
-    <Compile Include="Models\Tabulature.cs" />
-    <Compile Include="Models\TabulatureRating.cs" />
+    <Compile Include="Models\Tablature.cs" />
+    <Compile Include="Models\TablatureRating.cs" />
+    <Compile Include="Models\TablatureWithRating.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SongWithScore.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\DistanceFinder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-rating.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\delete.gif" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="Content\rateit.css" />
-    <Content Include="Content\star.gif" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\yellowstar.gif" />
+    <Content Include="Images\whitestar.gif" />
+    <Content Include="Images\starRating.png" />
+    <None Include="Resources\whitestar.gif" />
     <Content Include="Scripts\bootstrap-rating.js" />
     <Content Include="Scripts\bootstrap-rating.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -280,9 +285,9 @@
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
     <Content Include="Scripts\jquery.rateit.js" />
-    <Content Include="Scripts\jquery.rateit.min.js" />
-    <Content Include="Scripts\jquery.rateit.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -338,11 +343,11 @@
     <Content Include="Views\Songs\Details.cshtml" />
     <Content Include="Views\Songs\Edit.cshtml" />
     <Content Include="Views\Songs\Index.cshtml" />
-    <Content Include="Views\Tabulatures\Create.cshtml" />
-    <Content Include="Views\Tabulatures\Delete.cshtml" />
-    <Content Include="Views\Tabulatures\Details.cshtml" />
-    <Content Include="Views\Tabulatures\Edit.cshtml" />
-    <Content Include="Views\Tabulatures\Index.cshtml" />
+    <Content Include="Views\Tablatures\Create.cshtml" />
+    <Content Include="Views\Tablatures\Delete.cshtml" />
+    <Content Include="Views\Tablatures\Details.cshtml" />
+    <Content Include="Views\Tablatures\Edit.cshtml" />
+    <Content Include="Views\Tablatures\Index.cshtml" />
     <Content Include="Views\CreateUserRoles\Create.cshtml" />
     <Content Include="Views\CreateUserRoles\Index.cshtml" />
     <Content Include="Views\CreateUserRoles\ManageUserRoles.cshtml" />
@@ -353,15 +358,14 @@
     <Content Include="Views\MemberProfiles1\Details.cshtml" />
     <Content Include="Views\MemberProfiles1\Edit.cshtml" />
     <Content Include="Views\MemberProfiles1\Index.cshtml" />
-    <Content Include="Views\Tabulatures\_Rating.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\Tabulature.cshtml" />
     <Content Include="Views\MemberProfiles1\Connect.cshtml" />
     <Content Include="Views\Rating\Details.cshtml" />
-    <Content Include="Views\Tabulatures\Top10.cshtml" />
+    <Content Include="Views\Tablatures\Top10.cshtml" />
+    <Content Include="Views\Home\SearchArtists.cshtml" />
+    <Content Include="Views\Artists\SearchArtists.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\bootstrap-rating\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -373,6 +377,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605011624397_PageViews.resx">
       <DependentUpon>201605011624397_PageViews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

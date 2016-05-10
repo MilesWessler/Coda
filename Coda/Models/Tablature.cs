@@ -9,11 +9,9 @@ namespace Coda.Models
     {
         public int Id { get; set; }
         public int SongId { get; set; }
-        public Song Song { get; set; }
+        public virtual Song Song { get; set; }
         public string Content { get; set; }
-        public int Rating { get; set; }
-        public int TotalRaters { get; set; }
-        public double AverageRating { get; set; }
-
+        public string Rating { get; set; }
+        public int PageViews { get; set; }
     }
 }
