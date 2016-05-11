@@ -11,9 +11,8 @@ namespace Coda.Models
         public int PricePerHour { get; set; }
         public string Content { get; set; }
         public DateTime InstructorSince { get; set; }
-        public virtual List<Instrument> Instruments { get; set; }
-        public int MemberId { get; set; }
-        public virtual MemberProfile MemberProfile { get; set; }
+        public string Instrument { get; set; }
+      public virtual MemberProfile MemberProfile { get; set; }
 
     }
 }
