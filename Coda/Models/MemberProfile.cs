@@ -32,7 +32,7 @@ namespace Coda.Models
         public bool RAndB { get; set; }
         public bool Pop { get; set; }
         public bool Alternative { get; set; }
-        [DisplayName("Connect With Other Musicians With Similar Interests")]
+        [DisplayName("Would you like to connect with other members?")]
         public bool ConnectWithOtherMembers { get; set; }
     }
 }

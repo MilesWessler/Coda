@@ -190,6 +190,26 @@ namespace Coda.Migrations
 
             //    songs.ForEach(b => context.Songs.Add(b));
             //}
+            //List<Instrument> instruments = new List<Instrument>()
+            //{
+            //    new Instrument()
+            //    {
+            //        Name = "Guitar"
+            //    },
+            //    new Instrument()
+            //    {
+            //        Name = "Drums"
+            //    },
+            //    new Instrument()
+            //    {
+            //        Name = "Bass"
+            //    },
+            //    new Instrument()
+            //    {
+            //        Name = "Vocals"
+            //    },
+            //    };
+            //instruments.ForEach(i => context.Instruments.Add(i));
         }
     }
 }

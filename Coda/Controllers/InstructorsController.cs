@@ -7,118 +7,126 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Coda.Models;
-using Coda.Models.Repository;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using ZipCodeCoords;
 
 namespace Coda.Controllers
 {
-    public class ArtistsController : Controller
+    public class InstructorsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Artists
-        public ActionResult Index(string letter)
+        // GET: Instructors
+        public ActionResult Index()
         {
-            if (letter == null)
-            {
-                return View(db.Artists.ToList());
-            }
-            else
-            {
-                return View(db.Artists.Select(x => x).Where(t => t.Name.StartsWith(letter)).ToList());
-            }
+            return View(db.Instructor.ToList());
         }
 
-        // GET: Artists/Details/5
+        // GET: Instructors/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Artist artist = db.Artists.Find(id);
-            if (artist == null)
+            Instructor instructor = db.Instructor.Find(id);
+            if (instructor == null)
             {
                 return HttpNotFound();
             }
-            return View(artist);
+            return View(instructor);
         }
 
-        // GET: Artists/Create
+        // GET: Instructors/Create
         public ActionResult Create()
         {
+            ViewBag.Instruments = new SelectList(db.Instruments, "Id", "Name");
             return View();
         }
 
-        // POST: Artists/Create
+        // POST: Instructors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Artist artist)
+        public ActionResult Create([Bind(Include = "Id,Content,InstructorSince,MemberId")] Instructor instructor)
         {
             if (ModelState.IsValid)
             {
-                db.Artists.Add(artist);
+                ApplicationUser user =
+               System.Web.HttpContext.Current.GetOwinContext()
+                   .GetUserManager<ApplicationUserManager>()
+                   .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+                Instructor profileToAdd = new Instructor
+                {
+                    MemberProfile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Eamil == user.Email),
+                    Instruments = instructor.Instruments,
+                    InstructorSince = DateTime.Today,
+                    Content = instructor.Content
+                };
+                db.Instructor.Add(profileToAdd);
+                //db.MemberProfiles.Add(memberProfile);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Manage");
             }
 
-            return View(artist);
+            return View(instructor);
         }
 
-        // GET: Artists/Edit/5
+        // GET: Instructors/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Artist artist = db.Artists.Find(id);
-            if (artist == null)
+            Instructor instructor = db.Instructor.Find(id);
+            if (instructor == null)
             {
                 return HttpNotFound();
             }
-            return View(artist);
+            return View(instructor);
         }
 
-        // POST: Artists/Edit/5
+        // POST: Instructors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Artist artist)
+        public ActionResult Edit([Bind(Include = "Id,Content,InstructorSince,MemberId")] Instructor instructor)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(artist).State = EntityState.Modified;
+                db.Entry(instructor).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(artist);
+            return View(instructor);
         }
 
-        // GET: Artists/Delete/5
+        // GET: Instructors/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Artist artist = db.Artists.Find(id);
-            if (artist == null)
+            Instructor instructor = db.Instructor.Find(id);
+            if (instructor == null)
             {
                 return HttpNotFound();
             }
-            return View(artist);
+            return View(instructor);
         }
 
-        // POST: Artists/Delete/5
+        // POST: Instructors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Artist artist = db.Artists.Find(id);
-            db.Artists.Remove(artist);
+            Instructor instructor = db.Instructor.Find(id);
+            db.Instructor.Remove(instructor);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -130,12 +138,6 @@ namespace Coda.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        public ActionResult SearchArtists(string searchString)
-        {
-            ArtistRepository rep = new ArtistRepository();
-
-            return View(rep.GetByName(searchString));
         }
     }
 }
