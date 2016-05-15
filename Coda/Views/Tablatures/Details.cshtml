@@ -4,20 +4,31 @@
     ViewBag.Title = "Details";
 }
 
+<h3>
+    @Html.DisplayName("Artist: " + Model.Song.Artist.Name)
+</h3>
+<h3>
+    @Html.DisplayName("Song: " + Model.Song.Name)
+</h3>
+<br/>
+@Html.DevExpress().RatingControl(settings =>
+{
+    settings.Name = "rating1";
+    settings.FillPrecision = RatingControlItemFillPrecision.Exact;
 
-<div>
-    <dl class="dl-horizontal">
-       <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
+}).Bind(Model.Rating).GetHtml()
+<br/>
+<dl class="dl-horizontal">
+    <dd>
+        @Html.Raw(Model.Content.Replace("\n", "<br />"))
+    </dd>
 
-        <dd>
-            @Html.DisplayFormattedData(Model.Content)
-        </dd>
+</dl>
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+    </p>
+}
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

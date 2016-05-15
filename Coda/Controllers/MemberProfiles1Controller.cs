@@ -120,7 +120,7 @@ namespace Coda.Controllers
 
             return View(memberProfile);
         }
-
+        
         // GET: MemberProfiles1/Edit/5
         public ActionResult Edit(int? id)
         {

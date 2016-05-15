@@ -1,15 +1,31 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+	ViewBag.Title = "Home Page";
 }
 
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<style type="text/css">
+	.txtbox {
+		border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
+		border-bottom-left-radius: 20px;
+		border-bottom-right-radius: 20px;
+		}
+</style>
 
-<div class="jumbotron">
-    <h1>Search Artist</h1>
-    @using (Html.BeginForm("SearchArtists", "Artists"))
-    {
-        @Html.TextBox("SearchString")
-        <div>
-            <input type="submit" value="Search" />
-        </div>
-    }
+<div align="center">
+	@using (Html.BeginForm("SearchArtists", "Artists"))
+	{
+		@Html.TextBox("SearchString", null, new {@class = "txtbox"})
+		<div>
+			<input type="submit" value="Search"/>
+		</div>}
 </div>
+
+

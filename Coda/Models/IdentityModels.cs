@@ -32,7 +32,7 @@ namespace Coda.Models
         public DbSet<MemberProfile> MemberProfiles { get; set; }
         public DbSet<Tablature> Tabulatures { get; set; }
         public DbSet<SongScore> SongScores { get; set; }
-        public DbSet<RateLog> RateLogs { get; set; }
+        public DbSet<UserRatings> UserRatings { get; set; }
         public DbSet<Instructor> Instructor { get; set; }
       
 

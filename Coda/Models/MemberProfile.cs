@@ -34,5 +34,6 @@ namespace Coda.Models
         public bool Alternative { get; set; }
         [DisplayName("Would you like to connect with other members?")]
         public bool ConnectWithOtherMembers { get; set; }
+        public byte[] Image { get; set; }
     }
 }

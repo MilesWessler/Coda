@@ -28,7 +28,8 @@
                     <li>@Html.ActionLink("Top 10 Tabs", "Top10", "Tablatures")</li>
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Songs Flagged For Removal", "Details", "Rating")</li>
+                        <li>@Html.ActionLink("Flagged Tabs", "FlaggedTabs", "Tablatures")</li>
+                        <li>@Html.ActionLink("Top Rated Tabs", "FlaggedTabs", "Tablatures")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

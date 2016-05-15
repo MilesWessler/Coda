@@ -13,7 +13,6 @@ namespace Coda.Models.Repository
         ApplicationDbContext db = new ApplicationDbContext();
         public IQueryable<IGrouping<int, SongScore>> FlagSong()
         {
-
             var flagSong = from song in db.SongScores
 
                            group song by song.SongId
@@ -24,9 +23,6 @@ namespace Coda.Models.Repository
             return flagSong;
 
         }
-
-
-
     }
 }
 

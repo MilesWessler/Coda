@@ -28,11 +28,11 @@ public static class HtmlHelperExtensions
         return new HtmlString(result);
     }
 
-    public static HtmlString FindSong(int? id)
+    public static Song FindSong(int? id)
     {
         ApplicationDbContext db = new ApplicationDbContext();
 
         Song song = db.Songs.Find(id);
-        return new HtmlString(song.ToString());
+        return song;
     }
 }
