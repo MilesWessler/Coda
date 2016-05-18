@@ -3,24 +3,33 @@
 @{
     ViewBag.Title = "Details";
 }
+<br />
+<br />
+<br />
+<br />
+<br />
+<br/>
+<br />
+<br />
+<br />
 
-<h3>
-    @Html.DisplayName("Artist: " + Model.Song.Artist.Name)
-</h3>
-<h3>
-    @Html.DisplayName("Song: " + Model.Song.Name)
+<h3 align="center">
+    @Html.DisplayName(Model.Song.Artist.Name + ": " + Model.Song.Name)
 </h3>
 <br/>
-@Html.DevExpress().RatingControl(settings =>
+<div align="right">
+    @Html.DevExpress().RatingControl(settings =>
 {
     settings.Name = "rating1";
     settings.FillPrecision = RatingControlItemFillPrecision.Exact;
 
 }).Bind(Model.Rating).GetHtml()
-<br/>
+</div>
+<br />
 <dl class="dl-horizontal">
     <dd>
-        @Html.Raw(Model.Content.Replace("\n", "<br />"))
+        @Html.Raw("<div style='text-align:center;'>" + Model.Content.Replace("\n", "<br />") + "</div>")
+        @*@Html.Raw(Model.Content.Replace("\n", "<br />"))*@
     </dd>
 
 </dl>

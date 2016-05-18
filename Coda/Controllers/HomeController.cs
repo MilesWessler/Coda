@@ -23,7 +23,15 @@ namespace Coda.Controllers
 
             return View();
         }
-       
+
+        public ActionResult Events()
+        {
+            return View();
+        }
+        public ActionResult Test()
+        {
+            return View();
+        }
 
         //public ActionResult Contact()
         //{

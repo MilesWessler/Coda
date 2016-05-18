@@ -20,7 +20,7 @@ namespace Coda.Controllers
         {
             if (letter == null)
             {
-                return View(db.Artists.ToList());
+                return View(db.Artists.OrderBy(x => x.Name).ToList());
             }
             else
             {

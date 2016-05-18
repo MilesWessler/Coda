@@ -2,15 +2,28 @@
 
 @{
     ViewBag.Title = "Index";
+  
 }
 
-<h2>Index</h2>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 <p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<p>
-@for (int y = 0; y < 27; y++)
+@for (int y = 0; y < 26; y++)
 {
     char filter = Convert.ToChar(65 + y);
     string letter = filter.ToString();
@@ -19,8 +32,8 @@
     {
         letter = "All";
     }
-
-    @Html.ActionLink(letter, "Index", new { letter = letter });
+     
+    @Html.ActionLink(letter + " ", "Index", new { letter = letter });
    }
 </p>
 <table class="table">
