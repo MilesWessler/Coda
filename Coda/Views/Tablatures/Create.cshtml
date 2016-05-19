@@ -3,8 +3,16 @@
 @{
     ViewBag.Title = "Create";
 }
-
-<h2>Create</h2>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <link href="~/kindeditor/themes/default/default.css" rel="stylesheet" />
 <script src="~/kindeditor/kindeditor-all-min.js"></script>
 <script>
@@ -19,11 +27,11 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Tablature</h4>
+        <h4>Add Tablature</h4>
         <hr />
         @*@Html.Hidden("SongId", (string)ViewBag.SongId)*@
         <div class="form-group">
-            @Html.LabelFor(model => model.SongId, "Catagory", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SongId, "Songs", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-3">
                 @Html.DropDownList("SongId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.SongId, "", new { @class = "text-danger" })

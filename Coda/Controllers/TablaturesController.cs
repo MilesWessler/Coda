@@ -12,6 +12,8 @@ using System.Web.Mvc;
 using System.Web.Services;
 using Coda.Models;
 using Coda.Models.Repository;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 
 namespace Coda.Controllers
@@ -65,13 +67,19 @@ namespace Coda.Controllers
         [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,Content,SongId")] Tablature tablature)
         {
+            ApplicationUser user =
+                 System.Web.HttpContext.Current.GetOwinContext()
+                     .GetUserManager<ApplicationUserManager>()
+                     .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            MemberProfile profile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Eamil == user.Email);
             if (ModelState.IsValid)
             {
                 Tablature tabToAdd = new Tablature
                 {
                     Content = tablature.Content,
                     Song = db.Songs.Select(x => x).Where(t => t.Id == tablature.SongId).FirstOrDefault(),
-                    TimeCreated = DateTime.Now
+                    TimeCreated = DateTime.Now,
+                    EmailOfCreator = user.Email
                 };
                 db.Tabulatures.Add(tabToAdd);
                 //db.Tabulatures.Add(Tablature);
