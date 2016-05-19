@@ -20,12 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Song.Name)
         </th>
-        <th>
-            Page Views
-        </th>
-        <th>
-            Link to Tab
-        </th>
+        <th>Rating</th>
+        <th>Page Views</th>
+        <th>Link</th>
     </tr>
 
     @foreach (var item in Model)
@@ -33,6 +30,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Song.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PageViews)

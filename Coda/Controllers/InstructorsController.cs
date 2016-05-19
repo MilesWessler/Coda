@@ -65,7 +65,7 @@ namespace Coda.Controllers
                    .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
                 Instructor profileToAdd = new Instructor
                 {
-                    MemberProfile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Eamil == user.Email),
+                    MemberProfile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Email == user.Email),
                     PricePerHour = instructor.PricePerHour,
                     InstructorSince = DateTime.Today,
                     Content = instructor.Content
@@ -150,7 +150,7 @@ namespace Coda.Controllers
                System.Web.HttpContext.Current.GetOwinContext()
                    .GetUserManager<ApplicationUserManager>()
                    .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            Instructor profile = db.Instructor.Select(x => x).FirstOrDefault(t => t.MemberProfile.Eamil == user.Email);
+            Instructor profile = db.Instructor.Select(x => x).FirstOrDefault(t => t.MemberProfile.Email == user.Email);
            
                 List<Instructor> profiles = db.Instructor.Select(x => x).ToList();
                 profiles =

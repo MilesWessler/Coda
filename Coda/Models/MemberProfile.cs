@@ -14,7 +14,7 @@ namespace Coda.Models
 
         public int Id { get; set; }
         public string UserId { get; set; }
-        public string Eamil { get; set; }
+        public string Email { get; set; }
         public string Address { get; set; }
         [DisplayName("Zip Code")]
         public int ZipCode { get; set; }

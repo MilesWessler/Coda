@@ -16,6 +16,6 @@ namespace Coda.Models
         public DateTime TimeCreated { get; set; }
         public int TotalRaters { get; set; }
         public int PageViews { get; set; }
-        public string EmailOfCreator { get; set; }
+        public virtual MemberProfile MemberProfile { get; set; }
     }
 }

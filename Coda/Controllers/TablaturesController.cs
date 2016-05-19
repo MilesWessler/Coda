@@ -71,7 +71,7 @@ namespace Coda.Controllers
                  System.Web.HttpContext.Current.GetOwinContext()
                      .GetUserManager<ApplicationUserManager>()
                      .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            MemberProfile profile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Eamil == user.Email);
+            MemberProfile profile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Email == user.Email);
             if (ModelState.IsValid)
             {
                 Tablature tabToAdd = new Tablature
@@ -79,7 +79,7 @@ namespace Coda.Controllers
                     Content = tablature.Content,
                     Song = db.Songs.Select(x => x).Where(t => t.Id == tablature.SongId).FirstOrDefault(),
                     TimeCreated = DateTime.Now,
-                    EmailOfCreator = user.Email
+                    MemberProfile = profile
                 };
                 db.Tabulatures.Add(tabToAdd);
                 //db.Tabulatures.Add(Tablature);

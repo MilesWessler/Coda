@@ -25,7 +25,7 @@ namespace Coda.Controllers
                System.Web.HttpContext.Current.GetOwinContext()
                    .GetUserManager<ApplicationUserManager>()
                    .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            MemberProfile profile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Eamil == user.Email);
+            MemberProfile profile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Email == user.Email);
             if (profile.ConnectWithOtherMembers)
             {
                 List<MemberProfile> profiles = db.MemberProfiles.Select(x => x).ToList();
@@ -47,7 +47,7 @@ namespace Coda.Controllers
                 List<UserViewModel> usersNearby = new List<UserViewModel>();
                 profiles.ForEach(x => usersNearby.Add(new UserViewModel
                 {
-                    Email = x.Eamil,
+                    Email = x.Email,
                     ZipCode = x.ZipCode
                 }));
                 return View(usersNearby);
@@ -107,7 +107,7 @@ namespace Coda.Controllers
                     Alternative = memberProfile.Alternative,
                     ConnectWithOtherMembers = memberProfile.ConnectWithOtherMembers,
                     UserId = user.UserName,
-                    Eamil = user.Email,
+                    Email = user.Email,
                     Longitude = longitude,
                     Latitude = latitude
 
@@ -193,7 +193,7 @@ namespace Coda.Controllers
         //        System.Web.HttpContext.Current.GetOwinContext()
         //            .GetUserManager<ApplicationUserManager>()
         //            .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-        //    MemberProfile profile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Eamil == user.Email);
+        //    MemberProfile profile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Email == user.Email);
         //    if (profile.ConnectWithOtherMembers)
         //    {
         //        //IQueryable query = from memberProfiles in db.MemberProfiles
@@ -216,7 +216,7 @@ namespace Coda.Controllers
         //        List <UserViewModel> usersNearby = new List<UserViewModel>();
         //        profiles.ForEach(x => usersNearby.Add(new UserViewModel
         //        {
-        //            Email = x.Eamil,
+        //            Email = x.Email,
         //            ZipCode = x.ZipCode
         //        }));
         //        return View(usersNearby);

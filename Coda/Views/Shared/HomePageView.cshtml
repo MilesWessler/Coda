@@ -41,7 +41,7 @@
                     <li>@Html.ActionLink("Songs", "Index", "Songs")</li>
                     <li>@Html.ActionLink("Top 10 Tabs", "Top10", "Tablatures")</li>
                     <li>@Html.ActionLink("Music Preferences", "Create", "MemberProfiles1")</li>
-                    <li>@Html.ActionLink("Connect with other users in your area", "Index", "MemberProfiles1")</li> 
+                    <li>@Html.ActionLink("Connect", "Index", "MemberProfiles1")</li> 
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Flagged Tabs", "FlaggedTabs", "Tablatures")</li>

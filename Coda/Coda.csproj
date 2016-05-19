@@ -665,7 +665,6 @@
     <Content Include="Views\Instructors\Delete.cshtml" />
     <Content Include="Views\Instructors\Details.cshtml" />
     <Content Include="Views\Instructors\Edit.cshtml" />
-    <Content Include="Views\Instructors\Index.cshtml" />
     <Content Include="Views\Instructors\FindInstructors.cshtml" />
     <Content Include="Scripts\star-rating-master\bower.json" />
     <Content Include="Scripts\star-rating-master\package.json" />
@@ -715,6 +714,7 @@
     <Content Include="startbootstrap\sass\_mixins.scss" />
     <Content Include="startbootstrap\sass\_variables.scss" />
     <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Instructors\Index.cshtml" />
     <None Include="Views\Shared\HomePageView.cshtml" />
   </ItemGroup>
   <ItemGroup>
