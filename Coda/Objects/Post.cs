@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace JustBlog.Core.Objects
+namespace Coda.Objects
 {
     public class Post
     {
@@ -34,8 +34,7 @@ namespace JustBlog.Core.Objects
         public virtual DateTime? Modified
         { get; set; }
 
-        public virtual Category Category
-        { get; set; }
+        public virtual Category Category { get; set; }
 
         public virtual IList<Tag> Tags
         { get; set; }

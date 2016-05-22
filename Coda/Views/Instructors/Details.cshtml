@@ -4,39 +4,88 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<style>
+    .leftpic {
+        background-position: left top;
+        /*height : 133px;*/
+        padding: 0;
+        margin: 10px;
+        /*width: 138px;*/
+        float: left;
+    }
 
-<div>
-    <h4>Instructor</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
+    .rightpic {
+        background-position: top right;
+        /*height : 133px;*/
+        /*padding: 0;*/
+        /*width: 138px;*/
+        float: right;
+        /*margin: 10px;*/
+    }
+</style>
 
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.InstructorSince)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.InstructorSince)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MemberId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MemberId)
-        </dd>
-
-    </dl>
+<div class="leftpic">
+    @{
+        if (Model.MemberProfile.Image != null)
+        {
+            string imageBase64 = Convert.ToBase64String(Model.MemberProfile.Image);
+            string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+            <img src="@imageSrc" width="300" height="300" class="txtbox" style="padding: 1px; border: solid white; background-color: #42dca3" />}
+    }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+<dl style="text-align: justify">
+    <dt @*class="rightpic"*@ style="font-size: 22px;">
+        <h4 style="color:  #42dca3">Instructor Since</h4>
+        @Html.DisplayFor(model => model.InstructorSince)
+    </dt>
+ 
+    <dt @*class="rightpic"*@ style="font-size: 22px;">
+        <h4 style="color: #42dca3">Hourly Rate</h4>
+        $@Html.DisplayFor(model => model.PricePerHour)
+    </dt>
+</dl>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<dl align="left">
+    <dd class="txtbox" style="background: white; text-wrap: normal;">
+
+        @Html.Raw("<div style='text-align:center;'>" + Model.Content.Replace("\n", "<br />") + "</div>")
+
+    </dd>
+
+
+
+
+</dl>
+
+

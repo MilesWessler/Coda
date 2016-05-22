@@ -16,6 +16,8 @@ namespace Coda.Models
         public string UserId { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
+        public string UserName { get; set; }
+        public string AboutMe { get; set; }
         [DisplayName("Zip Code")]
         public int ZipCode { get; set; }
         public double Latitude { get; set; } 

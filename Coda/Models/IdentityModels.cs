@@ -34,7 +34,8 @@ namespace Coda.Models
         public DbSet<SongScore> SongScores { get; set; }
         public DbSet<UserRatings> UserRatings { get; set; }
         public DbSet<Instructor> Instructor { get; set; }
-      
+        public DbSet<FileTable> FileTable { get; set; }
+
 
 
 

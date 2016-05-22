@@ -21,7 +21,18 @@ namespace Coda.Controllers
         // GET: Instructors
         public ActionResult Index()
         {
-            return View(db.Instructor.ToList());
+            List<Instructor> instructors = db.Instructor.Select(x => x).ToList();
+
+            List<UserViewModel> instructorViewModel = new List<UserViewModel>();
+
+            instructors.ForEach(x => instructorViewModel.Add(new UserViewModel
+            {
+                Image = x.MemberProfile.Image,
+                UserName = x.MemberProfile.UserName,
+                Email = x.MemberProfile.Email,
+                UserId = x.Id
+            }));
+            return View(instructorViewModel);
         }
 
         // GET: Instructors/Details/5
@@ -50,7 +61,7 @@ namespace Coda.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,Content,InstructorSince,MemberId,PricePerHour,Instrument")] Instructor instructor)
         {
             if (ModelState.IsValid)
@@ -63,17 +74,19 @@ namespace Coda.Controllers
                System.Web.HttpContext.Current.GetOwinContext()
                    .GetUserManager<ApplicationUserManager>()
                    .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
                 Instructor profileToAdd = new Instructor
                 {
                     MemberProfile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Email == user.Email),
                     PricePerHour = instructor.PricePerHour,
                     InstructorSince = DateTime.Today,
-                    Content = instructor.Content
-                };
+                    Content = instructor.Content,
+                    };
+
                 db.Instructor.Add(profileToAdd);
-                //db.MemberProfiles.Add(memberProfile);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Manage");
+               db.SaveChanges();
+
+                return RedirectToAction("Index", "Home");
             }
 
             return View(instructor);

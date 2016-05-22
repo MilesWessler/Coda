@@ -39,8 +39,8 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Artists", "Index", "Artists")</li>
                     <li>@Html.ActionLink("Songs", "Index", "Songs")</li>
-                    <li>@Html.ActionLink("Top 10 Tabs", "Top10", "Tablatures")</li>
-                    <li>@Html.ActionLink("Music Preferences", "Create", "MemberProfiles1")</li>
+                    <li>@Html.ActionLink("Top 10", "Top10", "Tablatures")</li>
+                    <li>@Html.ActionLink("Profile", "Create", "MemberProfiles1")</li>
                     <li>@Html.ActionLink("Connect", "Index", "MemberProfiles1")</li> 
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {

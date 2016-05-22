@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -18,14 +19,16 @@ namespace Coda.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: MemberProfiles1
+     
         public ActionResult Index()
         {
             ApplicationUser user =
                System.Web.HttpContext.Current.GetOwinContext()
                    .GetUserManager<ApplicationUserManager>()
                    .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
             MemberProfile profile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Email == user.Email);
+
             if (profile.ConnectWithOtherMembers)
             {
                 List<MemberProfile> profiles = db.MemberProfiles.Select(x => x).ToList();
@@ -34,8 +37,9 @@ namespace Coda.Controllers
                         .Where(
                             t => DistanceFinder.FindDistanceBetweenCoordinates(profile.Latitude, profile.Longitude, t.Latitude, t.Longitude) <= 20)
                         .ToList();
-                profiles = profiles.Select(x => x).Where(t => t.Alternative == profile.Alternative && 
-                t.Blues == profile.Blues && 
+
+                profiles = profiles.Select(x => x).Where(t => t.Alternative == profile.Alternative &&
+                t.Blues == profile.Blues &&
                 t.ClassicRock == profile.ClassicRock &&
                 t.Grunge == profile.Grunge &&
                 t.Metal == profile.Metal &&
@@ -44,16 +48,22 @@ namespace Coda.Controllers
                 t.RAndB == profile.RAndB &&
                 t.Rock == profile.Rock).ToList();
                 profiles.Remove(profile);
+
                 List<UserViewModel> usersNearby = new List<UserViewModel>();
+
                 profiles.ForEach(x => usersNearby.Add(new UserViewModel
                 {
+                    Image = x.Image,
+                    UserName = x.UserName,
                     Email = x.Email,
-                    ZipCode = x.ZipCode
+                    ZipCode = x.ZipCode,
+                    UserId = x.Id
                 }));
+
                 return View(usersNearby);
             }
+
             return View();
-            //return View(db.MemberProfiles.ToList());
         }
 
         // GET: MemberProfiles1/Details/5
@@ -82,45 +92,54 @@ namespace Coda.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Address,ZipCode,Rock,ClassicRock,PunkRock,Grunge,Metal,Blues,RAndB,Pop,Alternative,ConnectWithOtherMembers,UserId")] MemberProfile memberProfile)
+        public ActionResult Create([Bind(Include = "Id,Address,ZipCode,Rock,ClassicRock,PunkRock,Grunge,Metal,Blues,RAndB,Pop,Alternative,ConnectWithOtherMembers,UserId,Image")] MemberProfile memberProfile, HttpPostedFileBase file)
         {
+
             if (ModelState.IsValid)
             {
-                ApplicationUser user =
-                System.Web.HttpContext.Current.GetOwinContext()
-                    .GetUserManager<ApplicationUserManager>()
-                    .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-                double latitude = Spatial.Search(memberProfile.ZipCode.ToString()).Latitude;
-                double longitude = Spatial.Search(memberProfile.ZipCode.ToString()).Longitude;
-                MemberProfile profileToAdd = new MemberProfile
+                if (file != null)
                 {
-                    Address = memberProfile.Address,
-                    ZipCode = memberProfile.ZipCode,
-                    Rock = memberProfile.Rock,
-                    ClassicRock = memberProfile.ClassicRock,
-                    PunkRock = memberProfile.PunkRock,
-                    Grunge = memberProfile.Grunge,
-                    Metal = memberProfile.Grunge,
-                    Blues = memberProfile.Blues,
-                    RAndB = memberProfile.RAndB,
-                    Pop = memberProfile.Pop,
-                    Alternative = memberProfile.Alternative,
-                    ConnectWithOtherMembers = memberProfile.ConnectWithOtherMembers,
-                    UserId = user.UserName,
-                    Email = user.Email,
-                    Longitude = longitude,
-                    Latitude = latitude
+                    //get the bytes from the uploaded file
+                    byte[] data = GetBytesFromFile(file);
+                    ApplicationUser user =
+                        System.Web.HttpContext.Current.GetOwinContext()
+                            .GetUserManager<ApplicationUserManager>()
+                            .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+                    double latitude = Spatial.Search(memberProfile.ZipCode.ToString()).Latitude;
+                    double longitude = Spatial.Search(memberProfile.ZipCode.ToString()).Longitude;
+                    MemberProfile profileToAdd = new MemberProfile
+                    {
+                        Address = memberProfile.Address,
+                        ZipCode = memberProfile.ZipCode,
+                        Rock = memberProfile.Rock,
+                        ClassicRock = memberProfile.ClassicRock,
+                        PunkRock = memberProfile.PunkRock,
+                        Grunge = memberProfile.Grunge,
+                        Metal = memberProfile.Grunge,
+                        Blues = memberProfile.Blues,
+                        RAndB = memberProfile.RAndB,
+                        Pop = memberProfile.Pop,
+                        Alternative = memberProfile.Alternative,
+                        ConnectWithOtherMembers = memberProfile.ConnectWithOtherMembers,
+                        UserId = user.UserName,
+                        Email = user.Email,
+                        Longitude = longitude,
+                        Latitude = latitude,
+                        Image = data,
+                        UserName = memberProfile.UserName,
+                        AboutMe = memberProfile.AboutMe
 
-                };
-                db.MemberProfiles.Add(profileToAdd);
-                //db.MemberProfiles.Add(memberProfile);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Manage");
+                    };
+                    db.MemberProfiles.Add(profileToAdd);
+                    //db.MemberProfiles.Add(memberProfile);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Manage");
+                }
             }
 
             return View(memberProfile);
         }
-        
+
         // GET: MemberProfiles1/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -186,6 +205,24 @@ namespace Coda.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        //Method to convert file into byte array
+        public byte[] GetBytesFromFile(HttpPostedFileBase file)
+        {
+            using (Stream inputStream = file.InputStream)
+            {
+                MemoryStream memoryStream = inputStream as MemoryStream;
+                if (memoryStream == null)
+                {
+                    memoryStream = new MemoryStream();
+                    inputStream.CopyTo(memoryStream);
+                }
+                return memoryStream.ToArray();
+            }
+
+        }
+
 
         //public ActionResult Connect()
         //{

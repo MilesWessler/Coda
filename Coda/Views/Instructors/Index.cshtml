@@ -1,51 +1,41 @@
-﻿@model IEnumerable<Coda.Models.Instructor>
+﻿@model IEnumerable<Coda.Models.UserViewModel>
 
-@{
-    ViewBag.Title = "Index";
-}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+@*<h2 style="color: #42dca3">Connections</h2>*@
 
-<h2>Index</h2>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PricePerHour)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InstructorSince)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Instrument)
-        </th>
-        <th></th>
-    </tr>
+    foreach (var item in Model)
+    {
+        <fieldset>
+            <br />
+            <br />
+            <div class="editor-label" style="color: #42dca3; font-size: 22px; font-weight: bold;">
+                @Html.DisplayFor(modelItem => item.UserName)
+                <br />
+            </div>
+            <div class="editor-field ">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PricePerHour)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InstructorSince)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Instrument)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+                @{
+                    if (item.Image != null)
+                    {
+                        string imageBase64 = Convert.ToBase64String(item.Image);
+                        string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                        <a href="@Url.Action("Details", "Instructors", new {id=item.UserId})"><img src="@imageSrc" width="200" height="200" /></a>
+                    }
+                }
+            </div>
+        </fieldset>
 
-</table>
+                        }
+                    }   
