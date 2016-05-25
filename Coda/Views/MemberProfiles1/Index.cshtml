@@ -13,32 +13,43 @@
 <br />
 <br />
 <br />
-@*<h2 style="color: #42dca3">Connections</h2>*@
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@if (Model == null)
+{
+    <h4>You currently have no connections </h4>
+    <h4>Please be sure to fill out your <a href="@Url.Action("Create", "MemberProfiles1")">Member Profile</a> if you haven't already. Otherwise please be sure to check back soon!</h4>
+    
+}
+
+else
 {
 
-    foreach (var item in Model)
-    {
-        <fieldset>
-            <br />
-            <br />
-            <div class="editor-label" style="color: #42dca3; font-size: 22px; font-weight: bold;">
-                @Html.DisplayFor(modelItem => item.UserName)
-                <br/>
-               </div>
-            <div class="editor-field ">
-               
-                @{
-                    if (item.Image != null)
-                    {
-                        string imageBase64 = Convert.ToBase64String(item.Image);
-                        string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-                        <a href="@Url.Action("Details", "MemberProfiles1", new {id=item.UserId})"><img src="@imageSrc" width="200" height="200"/></a>
-                    }
-                }
-            </div>
-        </fieldset>
+using (Html.BeginForm(null, null, FormMethod.Post, new {enctype = "multipart/form-data"}))
+ {
 
-                        }
-                    }
+     foreach (var item in Model)
+     {
+
+         <fieldset>
+             <br/>
+             <br/>
+             <div class="editor-label" style="color: #42dca3; font-size: 22px; font-weight: bold;">
+                 @Html.DisplayFor(modelItem => item.UserName)
+                 <br/>
+             </div>
+             <div class="editor-field ">
+
+                 @{
+                     if (item.Image != null)
+                     {
+                         string imageBase64 = Convert.ToBase64String(item.Image);
+                         string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                         <a href="@Url.Action("Details", "MemberProfiles1", new {id = item.UserId})"><img src="@imageSrc" width="300" height="300"/></a>
+                     }
+                 }
+             </div>
+         </fieldset>
+
+     }
+ }
+}

@@ -20,8 +20,9 @@ namespace Coda.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
      
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
+           
             ApplicationUser user =
                System.Web.HttpContext.Current.GetOwinContext()
                    .GetUserManager<ApplicationUserManager>()
@@ -65,6 +66,8 @@ namespace Coda.Controllers
 
             return View();
         }
+
+        
 
         // GET: MemberProfiles1/Details/5
         public ActionResult Details(int? id)
