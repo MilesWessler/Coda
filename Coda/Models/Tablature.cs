@@ -13,6 +13,7 @@ namespace Coda.Models
         public virtual Song Song { get; set; }
         public string Content { get; set; }
         public decimal Rating { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime TimeCreated { get; set; }
         public int TotalRaters { get; set; }
         public int PageViews { get; set; }

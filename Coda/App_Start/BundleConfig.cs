@@ -31,8 +31,8 @@ namespace Coda
 
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/bootstrap-rating.css",
+                      ////"~/Content/bootstrap.css",
+                      "~/Content/bootstrap-cyborg.css",
                       "~/Content/font-awesome.css",
                       "~/Content/site.css"));
 

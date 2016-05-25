@@ -1,91 +1,150 @@
-﻿@model Coda.Models.Instructor
+﻿@using System.Drawing
+@using System.Globalization
+@using Jmelosegui.Mvc.GoogleMap
+@model Coda.Models.Instructor
 
 @{
     ViewBag.Title = "Details";
 }
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<style>
-    .leftpic {
-        background-position: left top;
-        /*height : 133px;*/
+
+<style type="text/css">
+    * {
+        margin: 0;
         padding: 0;
-        margin: 10px;
-        /*width: 138px;*/
-        float: left;
     }
 
-    .rightpic {
-        background-position: top right;
-        /*height : 133px;*/
-        /*padding: 0;*/
-        /*width: 138px;*/
-        float: right;
-        /*margin: 10px;*/
+    p {
+        padding: 10px;
+    }
+
+    .leftd {
+        position: absolute;
+        left: 150px;
+        top: 100px;
+        width: 50%;
+    }
+
+    .rightd {
+        position: absolute;
+        right: 500px;
+        top: 150px;
+        width: 50%;
     }
 </style>
 
 
-<div class="leftpic">
+
+<div class="leftd">
     @{
         if (Model.MemberProfile.Image != null)
         {
             string imageBase64 = Convert.ToBase64String(Model.MemberProfile.Image);
             string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-            <img src="@imageSrc" width="300" height="300" class="txtbox" style="padding: 1px; border: solid white; background-color: #42dca3" />}
+            <img src="@imageSrc" width="300" height="300" class="rcorners" style="padding: 1px; border: solid white; background-color: #42dca3;"/>}
     }
 </div>
+<div class="rightd">
+    <table class="table">
+        <tr>
+            <th style="font-size: 22px;color: #42dca3;">Hourly Rate:</th>
+            <td style="font-size: 22px">$@Html.DisplayFor(model => model.PricePerHour).00</td>
+        </tr>
+        <tr>
+            <th style="font-size: 22px;color: #42dca3;">Instrument:</th>
+            <td style=" font-size: 22px">@Html.DisplayFor(model => model.Instrument)</td>
+        </tr>
+        <tr>
+            <th style="font-size: 22px;color: #42dca3;">Instructor Since:</th>
+            <td style=" font-size: 22px">@Html.DisplayFor(model => model.InstructorSince)</td>
+        </tr>
+        <tr>
+            <th style="font-size: 22px;color: #42dca3;">Location:</th>
+            <td style=" font-size: 22px">@Html.DisplayFor(model => model.BusinessAddress), @Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State)  @Html.DisplayFor(model => model.MemberProfile.ZipCode)</td>
+        </tr>
+    </table>
+</div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br />
+<br />
+<br />
+<br/>
+<br />
+<br/>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+    @*<h4 style="color: #42dca3">Click Marker to Learn More about @Html.DisplayFor(model => model.MemberProfile.UserName)</h4>*@
+    @{
+        Html.GoogleMap()
+            .Name("map")
+
+            .Center(c => c.Latitude(Model.MemberProfile.Longitude)
+                .Longitude(Model.MemberProfile.Latitude))
+
+            .Zoom(14)
+            .Height(400)
+            .StyledMapTypes(map =>
+                map.Add()
+
+                    .Styles(style =>
+                    {
+                        style.Add()
+                            .HueColor(Color.DarkBlue)
+                            .Visibility(MapTypeStylerVisibility.Simplified)
+                            .Gamma(1F)
+                            .Weight(0.5F);
+
+                        style.Add()
+                            .ElementType(ElementType.Labels)
+                            .Visibility(MapTypeStylerVisibility.On);
+
+                        style.Add()
+                            .FeatureType(FeatureType.Water)
+                            .Color(Color.DarkCyan);
+                    })
+
+                    .MapTypeName("Custom Style")
+            )
+            .MapTypeId("Custom Style")
+
+            .Markers(marker => marker.Add()
+                .Latitude(Model.MemberProfile.Longitude)
+                .Longitude(Model.MemberProfile.Latitude)
+                .Window(window => window.Add()
+                    .MaxWidth(500)
+                     .DisableAutoPan(false)
+                     .OpenOnRightClick(false)
+                    .Content(
+
+                    @<text>
+                        <div id="content">
+                            <div id="bodyContent">
+                                <p style="font-size: 18px; color: #42dca3; font-weight: bold; font-family: cursive">About Steve Via:</p>
+                                <p>
+                                    @Html.Raw("<div style='text-align:center;'>" + Model.Content.Replace("\n", "<br />") + "</div>")
+                                </p>
+                            </div>
+                        </div>
 
 
-<dl style="text-align: justify">
-    <dt @*class="rightpic"*@ style="font-size: 22px;">
-        <h4 style="color:  #42dca3">Instructor Since</h4>
-        @Html.DisplayFor(model => model.InstructorSince)
-    </dt>
- 
-    <dt @*class="rightpic"*@ style="font-size: 22px;">
-        <h4 style="color: #42dca3">Hourly Rate</h4>
-        $@Html.DisplayFor(model => model.PricePerHour)
-    </dt>
-</dl>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 
-<dl align="left">
-    <dd class="txtbox" style="background: white; text-wrap: normal;">
-
-        @Html.Raw("<div style='text-align:center;'>" + Model.Content.Replace("\n", "<br />") + "</div>")
-
-    </dd>
-
-
-
-
-</dl>
-
-
+                    </text>
+                    ))).Render();}
+    <br />
+    <br />
+    @section scripts {
+        @(Html.GoogleMap().ScriptRegistrar())
+    }

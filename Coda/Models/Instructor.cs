@@ -14,6 +14,9 @@ namespace Coda.Models
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime InstructorSince { get; set; }
         public string Instrument { get; set; }
+        public string BusinessAddress { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
         public virtual MemberProfile MemberProfile { get; set; }
 
     }

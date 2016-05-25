@@ -81,12 +81,12 @@
     <Reference Include="DevExpress.XtraReports.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraReports.v15.2.Web, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraScheduler.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="FluentNHibernate, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Jmelosegui.Mvc.GoogleMap, Version=0.8.0.0, Culture=neutral, PublicKeyToken=bf3d287218d508fe, processorArchitecture=MSIL">
+      <HintPath>..\packages\Jmelosegui.Mvc.Googlemap.0.8.0.0\lib\net45\Jmelosegui.Mvc.GoogleMap.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -98,20 +98,12 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Ninject.Web.Mvc, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -252,19 +244,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArtistsController.cs" />
-    <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\BlogPostsController.cs" />
     <Compile Include="Controllers\CreateUserRolesController.cs" />
     <Compile Include="Controllers\FileTableController.cs" />
     <Compile Include="Controllers\InstructorsController.cs" />
     <Compile Include="Controllers\MemberProfiles1Controller.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Extensions\Extension.cs" />
-    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\ImageHelper.cs" />
-    <Compile Include="IBlogRepository.cs" />
-    <Compile Include="Mappings\CategoryMap.cs" />
-    <Compile Include="Mappings\PostMap.cs" />
-    <Compile Include="Mappings\TagMap.cs" />
     <Compile Include="Migrations\201604291825152_InitalSchema.cs" />
     <Compile Include="Migrations\201604291825152_InitalSchema.Designer.cs">
       <DependentUpon>201604291825152_InitalSchema.cs</DependentUpon>
@@ -273,6 +260,7 @@
     <Compile Include="Migrations\201605011624397_PageViews.Designer.cs">
       <DependentUpon>201605011624397_PageViews.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\BlogPost.cs" />
     <Compile Include="Models\FileTable.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -287,7 +275,6 @@
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Instructor.cs" />
-    <Compile Include="Models\ListViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MemberProfile.cs" />
     <Compile Include="Models\RateLog.cs" />
@@ -302,23 +289,18 @@
     <Compile Include="Models\TablatureWithRating.cs" />
     <Compile Include="Models\UserRatings.cs" />
     <Compile Include="Models\UserViewModel.cs" />
-    <Compile Include="Objects\BlogRepository.cs" />
-    <Compile Include="Objects\Category.cs" />
-    <Compile Include="Objects\Post.cs" />
-    <Compile Include="Objects\RepositoryModule.cs" />
-    <Compile Include="Objects\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SongWithScore.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\DistanceFinder.cs" />
     <Compile Include="ViewModels\InstructorViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Blog\css\bootstrap.css" />
+    <Content Include="Content\Blog\css\bootstrap.min.css" />
+    <Content Include="Content\Blog\css\clean-blog.css" />
+    <Content Include="Content\Blog\css\clean-blog.min.css" />
+    <Content Include="Content\bootstrap-cyborg.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -331,10 +313,21 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\coachella.jpg" />
+    <Content Include="Images\concert1.jpg" />
+    <Content Include="Images\drums.jpg" />
+    <Content Include="Images\guitar.jpg" />
+    <Content Include="Scripts\Blog\bootstrap.js" />
+    <Content Include="Scripts\Blog\bootstrap.min.js" />
+    <Content Include="Scripts\Blog\clean-blog.js" />
+    <Content Include="Scripts\Blog\clean-blog.min.js" />
+    <Content Include="Scripts\Blog\jquery.js" />
+    <Content Include="Scripts\Blog\jquery.min.js" />
+    <Content Include="Scripts\jmelosegui.googlemap.js" />
+    <Content Include="Scripts\markerclusterer.js" />
+    <Content Include="startbootstrap\css\grayscale.css" />
     <Content Include="startbootstrap\img\fender.jpg" />
     <Content Include="startbootstrap\img\guitar.jpg" />
-    <Content Include="Images\yellowstar.gif" />
-    <Content Include="Images\whitestar.gif" />
     <Content Include="Images\starRating.png" />
     <Content Include="index.html" />
     <Content Include="Json\cycle.js" />
@@ -632,7 +625,6 @@
     <Content Include="startbootstrap\font-awesome\css\font-awesome.min.css" />
     <Content Include="startbootstrap\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="startbootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="startbootstrap\css\grayscale.css" />
     <Content Include="startbootstrap\img\downloads-bg.jpg" />
     <Content Include="startbootstrap\img\intro-bg.jpg" />
     <Content Include="startbootstrap\img\map-marker.png" />
@@ -642,8 +634,6 @@
     <Content Include="startbootstrap\js\grayscale.js" />
     <Content Include="startbootstrap\js\jquery.easing.min.js" />
     <Content Include="startbootstrap\js\jquery.js" />
-    <Content Include="teststrap\bootstrap.css" />
-    <Content Include="teststrap\bootstrap.min.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -759,10 +749,16 @@
     <Content Include="startbootstrap\sass\_variables.scss" />
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Instructors\Index.cshtml" />
-    <Content Include="Views\Blog\_PostTemplate.cshtml" />
     <Content Include="Views\FileTable\Index.cshtml" />
     <Content Include="Views\MemberProfiles1\_AddFile.cshtml" />
     <Content Include="Views\Instructors\Create.cshtml" />
+    <Content Include="Views\BlogPosts\Create.cshtml" />
+    <Content Include="Views\BlogPosts\Delete.cshtml" />
+    <Content Include="Views\BlogPosts\Details.cshtml" />
+    <Content Include="Views\BlogPosts\Edit.cshtml" />
+    <Content Include="Views\BlogPosts\Index.cshtml" />
+    <Content Include="Views\Instructors\InfoWindow.cshtml" />
+    <Content Include="startbootstrap\README.md" />
     <None Include="Views\Shared\HomePageView.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -775,13 +771,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604291825152_InitalSchema.resx">
       <DependentUpon>201604291825152_InitalSchema.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605011624397_PageViews.resx">
       <DependentUpon>201605011624397_PageViews.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

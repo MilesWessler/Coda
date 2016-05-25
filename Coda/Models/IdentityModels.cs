@@ -45,5 +45,6 @@ namespace Coda.Models
             return new ApplicationDbContext();
         }
 
+        public System.Data.Entity.DbSet<Coda.Models.BlogPost> BlogPosts { get; set; }
     }
 }

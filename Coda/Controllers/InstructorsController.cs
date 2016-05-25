@@ -38,6 +38,7 @@ namespace Coda.Controllers
         // GET: Instructors/Details/5
         public ActionResult Details(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -53,7 +54,7 @@ namespace Coda.Controllers
         // GET: Instructors/Create
         public ActionResult Create()
         {
-          
+
             return View();
         }
 
@@ -62,7 +63,8 @@ namespace Coda.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "Id,Content,InstructorSince,MemberId,PricePerHour,Instrument")] Instructor instructor)
+        public ActionResult Create(
+            [Bind(Include = "Id,Content,InstructorSince,MemberId,PricePerHour,Instrument")] Instructor instructor)
         {
             if (ModelState.IsValid)
             {
@@ -71,9 +73,9 @@ namespace Coda.Controllers
                 ViewBag.Instruments = new SelectList(instruments);
 
                 ApplicationUser user =
-               System.Web.HttpContext.Current.GetOwinContext()
-                   .GetUserManager<ApplicationUserManager>()
-                   .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+                    System.Web.HttpContext.Current.GetOwinContext()
+                        .GetUserManager<ApplicationUserManager>()
+                        .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
                 Instructor profileToAdd = new Instructor
                 {
@@ -81,10 +83,10 @@ namespace Coda.Controllers
                     PricePerHour = instructor.PricePerHour,
                     InstructorSince = DateTime.Today,
                     Content = instructor.Content,
-                    };
+                };
 
                 db.Instructor.Add(profileToAdd);
-               db.SaveChanges();
+                db.SaveChanges();
 
                 return RedirectToAction("Index", "Home");
             }
@@ -157,25 +159,49 @@ namespace Coda.Controllers
             }
             base.Dispose(disposing);
         }
+
         public ActionResult FindInstructors()
         {
             ApplicationUser user =
-               System.Web.HttpContext.Current.GetOwinContext()
-                   .GetUserManager<ApplicationUserManager>()
-                   .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+                System.Web.HttpContext.Current.GetOwinContext()
+                    .GetUserManager<ApplicationUserManager>()
+                    .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             Instructor profile = db.Instructor.Select(x => x).FirstOrDefault(t => t.MemberProfile.Email == user.Email);
-           
-                List<Instructor> profiles = db.Instructor.Select(x => x).ToList();
-                profiles =
-                    profiles.Select(x => x)
-                        .Where(
-                            t => profile != null && DistanceFinder.FindDistanceBetweenCoordinates(profile.MemberProfile.Latitude,
+
+            List<Instructor> profiles = db.Instructor.Select(x => x).ToList();
+            profiles =
+                profiles.Select(x => x)
+                    .Where(
+                        t =>
+                            profile != null &&
+                            DistanceFinder.FindDistanceBetweenCoordinates(profile.MemberProfile.Latitude,
                                 profile.MemberProfile.Longitude, t.MemberProfile.Latitude,
                                 t.MemberProfile.Longitude) <= 20)
-                        .ToList();
-                              profiles.Remove(profile);
-             return View(profiles);
-            }
+                    .ToList();
+            profiles.Remove(profile);
+            return View(profiles);
+        }
+        public ActionResult InfoWindow()
+        {
+            return View();
         }
     }
+}
+
+
+
+    
+
+    //public class InfoWindowModel
+    //{
+    //    public InfoWindowModel()
+    //    {
+    //        this.MaxWidth = 500;
+    //    }
+    //    public int MaxWidth { get; set; }
+    //    public bool DisableAutoPan { get; set; }
+    //    public bool OpenOnRightClick { get; set; }
+    //}
+
+
 
