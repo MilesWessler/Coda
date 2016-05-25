@@ -57,12 +57,12 @@
             </div>
         </div>
 
-        <div class="form-group" style="position: absolute; top: 650px; left:  560px; width: 50%">
-            @Html.LabelFor(model => model.Rock, htmlAttributes: new { @class = "control-label col-md-2", @style= "color:  #42dca3" })
+        <div class="form-group" style="position: absolute; top: 650px; left: 560px; width: 50%">
+          @Html.LabelFor(model => model.Rock, htmlAttributes: new {@class = "control-label col-md-2", @style = "color:  #42dca3"})
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.Rock)
-                    @Html.ValidationMessageFor(model => model.Rock, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Rock, "", new {@class = "text-danger"})
                 </div>
             </div>
         </div>

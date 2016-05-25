@@ -17,30 +17,29 @@
 
 
 <div class="editor-field " align="center">
-
-
     @{
         if (Model.Image != null)
         {
             string imageBase64 = Convert.ToBase64String(Model.Image);
             string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-            <img src="@imageSrc" class="rcorners" style="padding: 1px; border: solid white; background-color: #42dca3"/>}
+            <img src="@imageSrc" class="rcorners" />}
     }
     <br/>
     <br/>
+
     <h4>
         @Html.DisplayName(Model.UserName)
     </h4>
 </div>
 
 <h4 style="color: #42dca3">About Me</h4>
-<dd style="font-size: 22px">
+<dd style="font-size: 22px; color:white">
     @Html.DisplayFor(model => model.AboutMe)
 </dd>
 <hr />
 <h4 style="color:  #42dca3">Musical Preferences</h4>
 
-<dl style="text-align: justify; font-size: 22px">
+<dl style="text-align: justify; font-size: 22px; color:white">
 
     @if (Model.Rock != false)
     {
@@ -107,7 +106,7 @@
 </dl>
 <hr />
 <h4 style="color: #42dca3">Contact @Html.DisplayFor(model => model.UserName) at :</h4>
-<dd style="font-size: 22px">
+<dd style="font-size: 22px; color: white">
     @Html.DisplayFor(model => model.Email)
 </dd>
 

@@ -9,10 +9,7 @@
 <br />
 <br />
 <br />
-<br />
-<br />
-<br />
-<br />
+
 
 @if (Model == null)
 {
@@ -26,29 +23,33 @@ else
 
 using (Html.BeginForm(null, null, FormMethod.Post, new {enctype = "multipart/form-data"}))
  {
+     <h2 style="color: #42dca3; font-family: cursive">Connections Near You</h2>
+     <hr/>
 
      foreach (var item in Model)
      {
-
-         <fieldset>
-             <br/>
-             <br/>
-             <div class="editor-label" style="color: #42dca3; font-size: 22px; font-weight: bold;">
-                 @Html.DisplayFor(modelItem => item.UserName)
-                 <br/>
-             </div>
-             <div class="editor-field ">
+         <ul style="display: inline">
+             <li style="display: inline-table; margin: 20px 20px 20px 20px">
 
                  @{
                      if (item.Image != null)
                      {
                          string imageBase64 = Convert.ToBase64String(item.Image);
                          string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-                         <a href="@Url.Action("Details", "MemberProfiles1", new {id = item.UserId})"><img src="@imageSrc" width="300" height="300"/></a>
+                         <a href="@Url.Action("Details", "MemberProfiles1", new {id = item.UserId})"><img src="@imageSrc" width="300" height="300" class="rcorners" /></a>
                      }
                  }
-             </div>
-         </fieldset>
+             </li>
+
+         </ul>
+             @*<div class="editor-label" style="color: #42dca3; font-size: 22px; font-weight: bold;">
+                 @Html.DisplayFor(modelItem => item.UserName)
+                 <br/>
+             </div>*@
+             @*<div class="editor-field ">
+
+             </div>*@
+        
 
      }
  }
