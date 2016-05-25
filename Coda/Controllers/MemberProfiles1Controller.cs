@@ -92,7 +92,7 @@ namespace Coda.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Address,ZipCode,Rock,ClassicRock,PunkRock,Grunge,Metal,Blues,RAndB,Pop,Alternative,ConnectWithOtherMembers,UserId,Image")] MemberProfile memberProfile, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "Id,Address,ZipCode,Rock,ClassicRock,PunkRock,Grunge,Metal,Blues,RAndB,Pop,Alternative,ConnectWithOtherMembers,UserId,Image,UserName,AboutMe")] MemberProfile memberProfile, HttpPostedFileBase file)
         {
 
             if (ModelState.IsValid)

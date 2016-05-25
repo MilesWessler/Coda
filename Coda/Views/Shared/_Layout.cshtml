@@ -27,6 +27,7 @@
                     <li>@Html.ActionLink("Artists", "Index", "Artists")</li>
                     <li>@Html.ActionLink("Songs", "Index", "Songs")</li>
                     <li>@Html.ActionLink("Top 10 Tabs", "Top10", "Tablatures")</li>
+                    <li>@Html.ActionLink("Instructors", "Index", "Instructors")</li>
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Flagged Tabs", "FlaggedTabs", "Tablatures")</li>

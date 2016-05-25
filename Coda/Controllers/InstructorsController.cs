@@ -18,12 +18,18 @@ namespace Coda.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+   
+
         // GET: Instructors
         public ActionResult Index()
         {
             List<Instructor> instructors = db.Instructor.Select(x => x).ToList();
 
             List<UserViewModel> instructorViewModel = new List<UserViewModel>();
+
+            ViewBag.Long = db.MemberProfiles.Select(x => x.Latitude);
+            ViewBag.Lat = db.MemberProfiles.Select(x => x.Longitude);
+
 
             instructors.ForEach(x => instructorViewModel.Add(new UserViewModel
             {

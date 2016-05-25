@@ -19,25 +19,26 @@
 
     foreach (var item in Model)
     {
-        <fieldset>
-            <br />
-            <br />
-            <div class="editor-label" style="color: #42dca3; font-size: 22px; font-weight: bold;">
+        <ul style="display: inline;">
+           
+            @*<div class="editor-label" style="color: #42dca3; font-size: 22px; font-weight: bold;">
                 @Html.DisplayFor(modelItem => item.UserName)
                 <br />
-            </div>
-            <div class="editor-field ">
+            </div>*@
+          
+                <li style="display: inline-table; margin: 20px 20px 20px 20px">
 
-                @{
-                    if (item.Image != null)
-                    {
-                        string imageBase64 = Convert.ToBase64String(item.Image);
-                        string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-                        <a href="@Url.Action("Details", "Instructors", new {id=item.UserId})"><img src="@imageSrc" width="200" height="200" /></a>
+                    @{
+                        if (item.Image != null)
+                        {
+                            string imageBase64 = Convert.ToBase64String(item.Image);
+                            string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                            <a href="@Url.Action("Details", "Instructors", new {id = item.UserId})"><img src="@imageSrc" class="rcorners" width="300" height="300" style="padding: 1px; border: solid white; background-color: #42dca3;" /></a>
+                        }
                     }
-                }
-            </div>
-        </fieldset>
+                </li>
+          
+        </ul>
 
                         }
                     }   

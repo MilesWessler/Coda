@@ -59,8 +59,8 @@
             <td style=" font-size: 22px">@Html.DisplayFor(model => model.InstructorSince)</td>
         </tr>
         <tr>
-            <th style="font-size: 22px;color: #42dca3;">Location:</th>
-            <td style=" font-size: 22px">@Html.DisplayFor(model => model.BusinessAddress), @Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State)  @Html.DisplayFor(model => model.MemberProfile.ZipCode)</td>
+            <th style="font-size: 22px;color: #42dca3;">Contact:</th>
+            <td style="font-size: 22px">@Html.DisplayFor(model => model.MemberProfile.Email)</td>
         </tr>
     </table>
 </div>
@@ -132,7 +132,8 @@
                     @<text>
                         <div id="content">
                             <div id="bodyContent">
-                                <p style="font-size: 18px; color: #42dca3; font-weight: bold; font-family: cursive">About Steve Via:</p>
+                                <p style="font-size: 22px"><b>Location:</b> @Html.DisplayFor(model => model.BusinessAddress), @Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State)  @Html.DisplayFor(model => model.MemberProfile.ZipCode)</p>
+                                <p style="font-size: 18px; color: #42dca3; font-weight: bold; font-family: cursive">About @Html.DisplayFor(model => model.MemberProfile.UserName):</p>
                                 <p>
                                     @Html.Raw("<div style='text-align:center;'>" + Model.Content.Replace("\n", "<br />") + "</div>")
                                 </p>

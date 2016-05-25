@@ -3,6 +3,23 @@
     Layout = null;
 }
 
+<style>
+    .roundIt {
+         border-radius: 35px;
+    border: 2px solid #42dca3;
+    padding: 20px; 
+    width: 250px;
+    height: 20px;
+    }
+     .roundbutton {
+       border-radius: 35px;
+         height: 35px;
+         width: 90px;
+
+    border: 1px solid #42dca3;
+
+    }
+</style>
 
 <head>
     <meta charset="utf-8">
@@ -65,13 +82,13 @@
                             {
                                 @Html.TextBox("SearchString", null, new
                            {
-                               @class = "txtbox",
+                               @class = "roundIt",
                                @style = "width: 400px; height: 50px; font-size: 26px; color: black; text-align: center; ",
-                               @placeholder = "Submit"
+                               @placeholder = "Search Artists"
                            })
                                 <div class="">
                                     <br />
-                                    <input class="buttonround" type="submit" value="Search Artist" style="color: black" />
+                                    <input class="roundbutton" type="submit" value="Submit" style="color: black; font-weight: bold" />
                                 </div>
                             }
                         </div>
