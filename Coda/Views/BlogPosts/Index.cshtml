@@ -46,9 +46,16 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="@Html.ActionLink("Back to Coda", "Index", "Home")"></a>
+                        @Html.ActionLink("Create New Post", "Create", "BlogPosts")
                     </li>
-                </ul>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>
+                            @Html.ActionLink("Home", "Index", "BlogPosts", new { @class = "navbar-brand", @style = "color: black " })
+                        </li>
+                    }
+                    <li>
+</ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -82,10 +89,19 @@
                                 @Html.DisplayFor(model => item.SubHeading)
                             </h3>
                         </a>
-                        <p class="post-meta">Posted by <a href="#">@Html.DisplayFor(model => item.Author)</a> on @Html.DisplayFor(model => item.DateTime)</p>
+                        <p class="post-meta">Posted by <b style="font-weight: bold">@Html.DisplayFor(model => item.Author)</b> on <b>@Html.DisplayFor(model => item.DateTime)</b></p>
                     </div>
                 </div>
             </div>
+        </div>
+        <div align="right">
+            
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Edit", "Edit", new {id = item.Id})
+                <br/>
+                @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+            }
         </div>
         <hr />
     }

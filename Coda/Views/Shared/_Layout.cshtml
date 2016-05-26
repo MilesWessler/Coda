@@ -23,15 +23,24 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Artists", "Index", "Artists")</li>
-                    <li>@Html.ActionLink("Songs", "Index", "Songs")</li>
-                    <li>@Html.ActionLink("Top 10 Tabs", "Top10", "Tablatures")</li>
-                    <li>@Html.ActionLink("Instructors", "Index", "Instructors")</li>
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                   
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
+                        <li>@Html.ActionLink("Artists", "Index", "Artists")</li>
+                        <li>@Html.ActionLink("Songs", "Index", "Songs")</li>
+                        <li>@Html.ActionLink("Top 10 Tabs", "Top10", "Tablatures")</li>
                         <li>@Html.ActionLink("Flagged Tabs", "FlaggedTabs", "Tablatures")</li>
-                        <li>@Html.ActionLink("Top Rated Tabs", "FlaggedTabs", "Tablatures")</li>
+                        <li>@Html.ActionLink("Top Rated Tabs", "TopRatedTabs", "Tablatures")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Artists", "Index", "Artists")</li>
+                        <li>@Html.ActionLink("Songs", "Index", "Songs")</li>
+                        <li>@Html.ActionLink("Top 10 Tabs", "Top10", "Tablatures")</li>
+                        <li>@Html.ActionLink("Profile", "Create", "MemberProfiles1")</li>
+                        <li>@Html.ActionLink("Connect", "Index", "MemberProfiles1")</li>
+                        <li>@Html.ActionLink("Instructors", "Index", "Instructors")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

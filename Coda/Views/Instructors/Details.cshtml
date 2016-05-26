@@ -8,135 +8,119 @@
 }
 
 
-<style type="text/css">
-
-
-	.ldive{
-	   position:absolute;
-		top: 150px;
-		left: 700px;
-	}
-
-	.rdive {
-		position: absolute;
-		top: 200px;
-		right: 920px;
-	}
-</style>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
 
 
-<div class="ldive">
+<div class="text-center">
 	@{
 		if (Model.MemberProfile.Image != null)
 		{
 			string imageBase64 = Convert.ToBase64String(Model.MemberProfile.Image);
 			string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-			<img src="@imageSrc" width="300" height="300" class="rcorners" style="padding: 1px; border: solid white; background-color: #42dca3;" />}
+			<img src="@imageSrc" width="300" height="300" class="rcorners" style="padding: 1px; border: solid white; background-color: #42dca3;"/>}
 	}
 </div>
-<div class="rdive">
-	<table class="table">
-		<tr>
-			<th style="font-size: 22px;color: #42dca3;">Hourly Rate:</th>
-			<td style="font-size: 22px">$@Html.DisplayFor(model => model.PricePerHour).00</td>
-		</tr>
-		<tr>
-			<th style="font-size: 22px; color: #42dca3;">Teaches:</th>
-			<td style="font-size: 22px">@Html.DisplayFor(model => model.Instrument)</td>
-		</tr>
-		<tr>
-			<th style="font-size: 22px;color: #42dca3;">Instructor Since:</th>
-			<td style="font-size: 22px">@Html.DisplayFor(model => model.InstructorSince)</td>
-		</tr>
-		<tr>
-			<th style="font-size: 22px;color: #42dca3;">Contact:</th>
-			<td style="font-size: 22px">@Html.DisplayFor(model => model.MemberProfile.Email)</td>
-		</tr>
-	</table>
-</div>
+<br/>
+<br/>
+<br/>
+<br />
+	<div class="text-center">
+		<table class="table">
+			<tr>
+				<th style="font-size: 22px; color: #42dca3;">Hourly Rate:</th>
+				<td style="font-size: 22px">$@Html.DisplayFor(model => model.PricePerHour).00</td>
+			</tr>
+			<tr>
+				<th style="font-size: 22px; color: #42dca3;">Teaches:</th>
+				<td style="font-size: 22px">@Html.DisplayFor(model => model.Instrument)</td>
+			</tr>
+			<tr>
+				<th style="font-size: 22px; color: #42dca3;">Instructor Since:</th>
+				<td style="font-size: 22px">@Html.DisplayFor(model => model.InstructorSince)</td>
+			</tr>
+			<tr>
+				<th style="font-size: 22px; color: #42dca3;">Contact:</th>
+				<td style="font-size: 22px">@Html.DisplayFor(model => model.MemberProfile.Email)</td>
+			</tr>
+		</table>
+	</div>
+@*<br/>
+<br/>
+<br/>
+<br />*@
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 
-<h4 style="color: #42dca3; font-family: cursive">Click Marker to Learn More about @Html.DisplayFor(model => model.MemberProfile.UserName)</h4>
-@{
-	Html.GoogleMap()
-		.Name("map")
 
-		.Center(c => c.Latitude(Model.MemberProfile.Longitude)
-			.Longitude(Model.MemberProfile.Latitude))
+<div class="text-center">
 
-		.Zoom(14)
-		.Height(400)
-		.StyledMapTypes(map =>
-			map.Add()
+	@*<h4 style="color: #42dca3; font-family: cursive">Click Marker to Learn More about @Html.DisplayFor(model => model.MemberProfile.UserName)</h4>*@
+	@{
+		Html.GoogleMap()
+			.Name("map")
 
-				.Styles(style =>
-				{
-					style.Add()
-						.HueColor(Color.DarkBlue)
-						.Visibility(MapTypeStylerVisibility.Simplified)
-						.Gamma(1F)
-						.Weight(0.5F);
+			.Center(c => c.Latitude(Model.MemberProfile.Longitude)
+				.Longitude(Model.MemberProfile.Latitude))
 
-					style.Add()
-						.ElementType(ElementType.Labels)
-						.Visibility(MapTypeStylerVisibility.On);
+			.Zoom(14)
+			.Height(400)
+			.StyledMapTypes(map =>
+				map.Add()
 
-					style.Add()
-						.FeatureType(FeatureType.Water)
-						.Color(Color.DarkCyan);
-				})
+					.Styles(style =>
+					{
+						style.Add()
+							.HueColor(Color.DarkBlue)
+							.Visibility(MapTypeStylerVisibility.Simplified)
+							.Gamma(1F)
+							.Weight(0.5F);
 
-				.MapTypeName("Custom Style")
-		)
-		.MapTypeId("Custom Style")
+						style.Add()
+							.ElementType(ElementType.Labels)
+							.Visibility(MapTypeStylerVisibility.On);
 
-		.Markers(marker => marker.Add()
-			.Latitude(Model.MemberProfile.Longitude)
-			.Longitude(Model.MemberProfile.Latitude)
-			.Window(window => window.Add()
-				.MaxWidth(500)
-				 .DisableAutoPan(false)
-				 .OpenOnRightClick(false)
-				.Content(
+						style.Add()
+							.FeatureType(FeatureType.Water)
+							.Color(Color.DarkCyan);
+					})
 
-				@<text>
-					<div id="content">
-						<div id="bodyContent">
-							<p style="font-size: 22px"><b>Location:</b> @Html.DisplayFor(model => model.BusinessAddress), @Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State)  @Html.DisplayFor(model => model.MemberProfile.ZipCode)</p>
-							<p style="font-size: 18px; color: #42dca3; font-weight: bold; font-family: cursive">About @Html.DisplayFor(model => model.MemberProfile.UserName):</p>
-							<p>
-								@Html.Raw("<div style='text-align:center;'>" + Model.Content.Replace("\n", "<br />") + "</div>")
-							</p>
+					.MapTypeName("Custom Style")
+			)
+			.MapTypeId("Custom Style")
+
+			.Markers(marker => marker.Add()
+				.Latitude(Model.MemberProfile.Longitude)
+				.Longitude(Model.MemberProfile.Latitude)
+				.Window(window => window.Add()
+					.MaxWidth(500)
+					 .DisableAutoPan(false)
+					 .OpenOnRightClick(false)
+					.Content(
+
+					@<text>
+						<div id="content">
+							<div id="bodyContent">
+								<p style="font-size: 22px"><b>Location:</b> @Html.DisplayFor(model => model.BusinessAddress), @Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State)  @Html.DisplayFor(model => model.MemberProfile.ZipCode)</p>
+								<p style="font-size: 18px; color: #42dca3; font-weight: bold; font-family: cursive">About @Html.DisplayFor(model => model.MemberProfile.UserName):</p>
+								<p>
+									@Html.Raw("<div style='text-align:center;'>" + Model.Content.Replace("\n", "<br />") + "</div>")
+								</p>
+							</div>
 						</div>
-					</div>
 
 
 
-				</text>
-					))).Render();}
-<br />
-<br />
-@section scripts {
-	@(Html.GoogleMap().ScriptRegistrar())
-}
+					</text>))).Render();}
+	<br />
+	<br />
+	@section scripts {
+		@(Html.GoogleMap().ScriptRegistrar())
+	}
+</div>

@@ -26,6 +26,13 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .blogimg {
+            max-width: 100%;
+            width: auto;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -60,82 +67,96 @@
         <!-- /.container -->
     </nav>
 
+    <br />
+    <br />
+    <br />
+  
 
 
 
-    <header class="intro-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="post-heading">
-                        <h1 style="color: white; text-shadow: 3px 0 0 #42dca3, -3px 0 0 #42dca3, 0 3px 0 #42dca3, 0 -2px 0 #42dca3, 2px 2px #42dca3, -2px -2px 0 #42dca3, 2px -2px 0 #42dca3, -2px 2px 0 #42dca3;">@Html.DisplayFor(model => model.Title)</h1>
-                        <h2 class="subheading">@Html.DisplayFor(model => model.SubHeading)</h2>
-                    </div>
-                </div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+                <h1 style="color: white; text-shadow: 3px 0 0 #42dca3, -3px 0 0 #42dca3, 0 3px 0 #42dca3, 0 -2px 0 #42dca3, 2px 2px #42dca3, -2px -2px 0 #42dca3, 2px -2px 0 #42dca3, -2px 2px 0 #42dca3;">@Html.DisplayFor(model => model.Title)</h1>
             </div>
         </div>
-    </header>
-<div class="editor-field " align="center">
+    </div>
+</div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+<div class="editor-field" align="center">
     @if (Model.Image != null)
     {
         string imageBase64 = Convert.ToBase64String(Model.Image);
         string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-        <img src="@imageSrc" width="300" height="300" class="txtbox" style="padding: 1px; border: solid white; background-color: #42dca3"/>
+        <img src="@imageSrc" class="blogimg" style="padding: 1px; border: solid;"/>
     }
-
 </div>
 
-        <article>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                        <span style="font-family: cursive " class="meta">Posted by <a href="#">@Html.DisplayFor(model => model.Author)</a> on @Html.DisplayFor(model => model.DateTime)</span>
-                        <p>@Html.DisplayFor(model => model.Body)</p>
-                    </div>
+    <br />
+    <br />
+    <br />
+   
+
+<article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <span style="font-family: cursive" class="meta">Posted by <b>@Html.DisplayFor(model => model.Author)</b> on <b> @Html.DisplayFor(model => model.DateTime)</b></span>
+                    <p style="font-size: 22px">@Html.DisplayFor(model => model.Body)</p>
                 </div>
             </div>
-        </article>
-        <hr>
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                        <ul class="list-inline text-center">
-                            <li>
-                                <a href="#">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <p class="copyright text-muted">Copyright &copy; Coda @DateTime.Now</p>
-                    </div>
+        </div>
+    </article>
+    <hr>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Coda @DateTime.Now</p>
                 </div>
             </div>
-        </footer>
-        <!-- jQuery -->
-        @Scripts.Render("~~/startbootstrap/js/jquery.js")
-        @Scripts.Render("~/startbootstrap/js/bootstrap.min.js")
-        @Scripts.Render("~/startbootstrap/js/clean-blog.min.js")
+        </div>
+    </footer>
+    <!-- jQuery -->
+    @Scripts.Render("~~/startbootstrap/js/jquery.js")
+    @Scripts.Render("~/startbootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/startbootstrap/js/clean-blog.min.js")
 
 </body>
 </html>

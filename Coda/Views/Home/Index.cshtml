@@ -4,21 +4,16 @@
 }
 
 <style>
-    .roundIt {
-         border-radius: 35px;
-    border: 2px solid #42dca3;
+.rcorners2 {
+    border-radius: 25px;
+    border: 2px solid #73AD21;
     padding: 20px; 
-    width: 250px;
-    height: 20px;
-    }
-     .roundbutton {
-       border-radius: 35px;
-         height: 35px;
-         width: 90px;
+    width: 200px;
+    height: 150px;
+   
+}
 
-    border: 1px solid #42dca3;
-
-    }
+    
 </style>
 
 <head>
@@ -55,17 +50,23 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Artists", "Index", "Artists")</li>
-                    <li>@Html.ActionLink("Songs", "Index", "Songs")</li>
-                    <li>@Html.ActionLink("Top 10", "Top10", "Tablatures")</li>
-                    <li>@Html.ActionLink("Profile", "Create", "MemberProfiles1")</li>
-                    <li>@Html.ActionLink("Connect", "Index", "MemberProfiles1")</li> 
                    
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
+                        <li>@Html.ActionLink("Artists", "Index", "Artists")</li>
+                        <li>@Html.ActionLink("Songs", "Index", "Songs")</li>
+                        <li>@Html.ActionLink("Top 10 Tabs", "Top10", "Tablatures")</li>
                         <li>@Html.ActionLink("Flagged Tabs", "FlaggedTabs", "Tablatures")</li>
-                        <li>@Html.ActionLink("Top Rated Tabs", "FlaggedTabs", "Tablatures")</li>
+                        <li>@Html.ActionLink("Top Rated Tabs", "TopRatedTabs", "Tablatures")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Artists", "Index", "Artists")</li>
+                        <li>@Html.ActionLink("Songs", "Index", "Songs")</li>
+                        <li>@Html.ActionLink("Top 10 Tabs", "Top10", "Tablatures")</li>
+                        <li>@Html.ActionLink("Profile", "Create", "MemberProfiles1")</li>
+                        <li>@Html.ActionLink("Connect", "Index", "MemberProfiles1")</li>
+                        <li>@Html.ActionLink("Instructors", "Index", "Instructors")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -77,23 +78,22 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <div class="centermiddle">
+                        <div class="media-middle" >
                             @using (Html.BeginForm("SearchArtists", "Artists"))
                             {
                                 @Html.TextBox("SearchString", null, new
                            {
-                               @class = "roundIt",
-                               @style = "width: 400px; height: 50px; font-size: 26px; color: black; text-align: center; ",
-                               @placeholder = "Search Artists"
+
+                               @placeholder="Search Artists...",
+                               @style= "border-radius: 25px; border: 1px solid black; outline: 0; padding: 20px; width: 400px; height: 75px; text-align: center; font-size: 22px; color: black; font-weight: bold;",
+                               @type="text",
+                             
+                               
                            })
-                                <div class="">
-                                    <br />
-                                    <input class="roundbutton" type="submit" value="Submit" style="color: black; font-weight: bold" />
-                                </div>
+                               @*<button class="button" type="submit" value="Submit" ></button>*@ 
                             }
                         </div>
-                        <i class="fa fa-angle-double-down animated"></i>
-                    </div>
+                     </div>
                 </div>
             </div>
         </div>

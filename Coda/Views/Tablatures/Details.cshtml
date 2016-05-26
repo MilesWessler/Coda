@@ -27,9 +27,9 @@
 </div>
 <br />
 <dl class="dl-horizontal">
-    <dd>
-        @Html.Raw("<div style='text-align:center;'>" + Model.Content.Replace("\n", "<br />") + "</div>")
-        @*@Html.Raw(Model.Content.Replace("\n", "<br />"))*@
+    <dd >
+        @*@Html.Raw("<div style='text-align:center'>" + Model.Content.Replace("\n", "<br />") + "</div>")*@
+        @Html.Raw(Model.Content.Replace("\n", "<br />"))
     </dd>
 
 </dl>

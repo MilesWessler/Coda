@@ -36,6 +36,7 @@ namespace Coda.Models
         public DbSet<Instructor> Instructor { get; set; }
         public DbSet<FileTable> FileTable { get; set; }
 
+        public DbSet<BlogPost> BlogPosts { get; set; }
 
 
 
@@ -45,6 +46,5 @@ namespace Coda.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<Coda.Models.BlogPost> BlogPosts { get; set; }
+       }
     }
-}

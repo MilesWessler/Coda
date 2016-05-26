@@ -18,7 +18,10 @@ namespace Coda.Controllers
         // GET: BlogPosts
         public ActionResult Index()
         {
-            return View(db.BlogPosts.ToList());
+            var data = db.BlogPosts.ToList();
+            List<BlogPost> blogPosts = data.OrderByDescending(b => b.Id).ToList();
+
+            return View(blogPosts);
         }
 
         // GET: BlogPosts/Details/5
@@ -46,7 +49,7 @@ namespace Coda.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,Title,SubHeading,Author,DateTime,Body")] BlogPost blogPost, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
