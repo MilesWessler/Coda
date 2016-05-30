@@ -7,9 +7,11 @@ namespace Coda.Models
 {
     public class TablatureRating
     {
-        public int TablatureID { get; set; }
-        public int Rating { get; set; }
-        public int TotalRaters { get; set; }
-        public double AverageRating { get; set; }
+        public int Id { get; set; }
+        public int? TablatureID { get; set; }
+        public double Rating { get; set; }
+        //public int TotalRaters { get; set; }
+        //public double AverageRating { get; set; }
+        public virtual Tablature Tablature { get; set; }
     }
 }

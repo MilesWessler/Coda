@@ -37,6 +37,8 @@ namespace Coda.Models
         public DbSet<FileTable> FileTable { get; set; }
 
         public DbSet<BlogPost> BlogPosts { get; set; }
+        public DbSet<TablatureRating> TablatureRatings { get; set; }
+
 
 
 

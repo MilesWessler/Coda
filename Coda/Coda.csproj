@@ -48,6 +48,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="BootstrapRating, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\bootstrap-rating.mvc.1.0.0\lib\net452\BootstrapRating.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.Charts.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Dashboard.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Dashboard.v15.2.Web, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -249,17 +253,15 @@
     <Compile Include="Controllers\FileTableController.cs" />
     <Compile Include="Controllers\InstructorsController.cs" />
     <Compile Include="Controllers\MemberProfiles1Controller.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Extensions\Extension.cs" />
     <Compile Include="Extensions\ImageHelper.cs" />
-    <Compile Include="Migrations\201604291825152_InitalSchema.cs" />
-    <Compile Include="Migrations\201604291825152_InitalSchema.Designer.cs">
-      <DependentUpon>201604291825152_InitalSchema.cs</DependentUpon>
+    <Compile Include="Migrations\201605270300142_Initial.cs" />
+    <Compile Include="Migrations\201605270300142_Initial.Designer.cs">
+      <DependentUpon>201605270300142_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605011624397_PageViews.cs" />
-    <Compile Include="Migrations\201605011624397_PageViews.Designer.cs">
-      <DependentUpon>201605011624397_PageViews.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BlogPost.cs" />
     <Compile Include="Models\FileTable.cs" />
     <Compile Include="Models\Genre.cs" />
@@ -270,7 +272,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -286,7 +287,6 @@
     <Compile Include="Models\Tablature.cs" />
     <Compile Include="Models\TablatureRating.cs" />
     <Compile Include="Models\Repository\TablatureRepository.cs" />
-    <Compile Include="Models\TablatureWithRating.cs" />
     <Compile Include="Models\UserRatings.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -294,6 +294,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\DistanceFinder.cs" />
     <Compile Include="ViewModels\InstructorViewModel.cs" />
+    <Compile Include="ViewModels\TablatureWithRating.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Blog\css\bootstrap.css" />
@@ -301,6 +302,7 @@
     <Content Include="Content\Blog\css\clean-blog.css" />
     <Content Include="Content\Blog\css\clean-blog.min.css" />
     <Content Include="Content\bootstrap-cyborg.css" />
+    <Content Include="Content\bootstrap-rating.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -323,6 +325,8 @@
     <Content Include="Scripts\Blog\clean-blog.min.js" />
     <Content Include="Scripts\Blog\jquery.js" />
     <Content Include="Scripts\Blog\jquery.min.js" />
+    <Content Include="Scripts\bootstrap-rating\bootstrap-rating.js" />
+    <Content Include="Scripts\bootstrap-rating\bootstrap-rating.min.js" />
     <Content Include="Scripts\jmelosegui.googlemap.js" />
     <Content Include="Scripts\markerclusterer.js" />
     <Content Include="startbootstrap\css\grayscale.css" />
@@ -760,6 +764,8 @@
     <Content Include="Views\Instructors\InfoWindow.cshtml" />
     <Content Include="startbootstrap\README.md" />
     <None Include="Views\Shared\HomePageView.cshtml" />
+    <Content Include="Views\Tablatures\_Rating.cshtml" />
+    <Content Include="Views\Tablatures\_NewRating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -769,13 +775,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604291825152_InitalSchema.resx">
-      <DependentUpon>201604291825152_InitalSchema.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605011624397_PageViews.resx">
-      <DependentUpon>201605011624397_PageViews.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Migrations\201605270300142_Initial.resx">
+      <DependentUpon>201605270300142_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -7,13 +7,13 @@ namespace Coda.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitalSchema : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitalSchema));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604291825152_InitalSchema"; }
+            get { return "201605270300142_Initial"; }
         }
         
         string IMigrationMetadata.Source

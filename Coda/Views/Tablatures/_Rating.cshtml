@@ -1,30 +1,8 @@
 ﻿@model Coda.ViewModels.TablatureWithRating
 
-@{
-    ViewBag.Title = "Details";
-}
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
-<h3 align="center">
-    @*@Html.DisplayName(Model.Tablature.Song.Artist.Name + ": " + Model.Tablature.Song.Name)*@
-</h3>
-<br />
-
-@*<div>
-        @Html.Partial("_Rating")
-    </div>*@
 
 <link href="~/Content/bootstrap-rating.css" rel="stylesheet" />
-@*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
 <script src="~/Scripts/bootstrap-rating/bootstrap-rating.min.js"></script>
 @section scripts
 {
@@ -54,47 +32,23 @@
     </script>
 }
 
-
 <div id="container">
-    
 
-    @Html.Partial("_Rating", Model)
-</div>
-
-
-@*<div id="container">
-    <div class="col-md-10">
-
-        @using (Ajax.BeginForm("Details", "Tablatures", null, new AjaxOptions
-        {
-            LoadingElementId = "rating",
-            HttpMethod = "POST",
-            InsertionMode = InsertionMode.Replace
-        }))
-        {
-            <div >
+    @using (Ajax.BeginForm("_Rating", "Tablatures", null, new AjaxOptions
+    {
+        LoadingElementId = "rate",
+        HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+    {
+        <div class="form-group">
+            <b style="color: white">Average Rating</b> <br />@Html.BootstrapRating().Value(Math.Round(Model.AverageRating, 2)).Fractions(4).ReadOnly
+            <span id="rate">
                 @Html.HiddenFor(m => m.Id)
-                @Html.BootstrapRating().Value(Model.AverageRating).Fractions(4)
-              <input type="submit" class="btn btn-success btn-sm" value="Submit" />
-            </div>
-        }
-    </div>
+                <br/>
+                <br/>
+                <b style="color: white">Your Rating</b> <br/>
+                @Html.BootstrapRating(m => m.Rating).Value(Model.Rating).Fractions(4).Class("rating-tooltip")
+            </span>
+            <input type="submit" class="btn btn-success btn-sm" value="Submit"/>
+        </div>
+    }
 </div>
-<div id="rating">
-        @Html.BootstrapRating(m => m.Rating).ReadOnly
-  
-    </div>*@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
