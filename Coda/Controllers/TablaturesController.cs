@@ -99,75 +99,73 @@ namespace Coda.Controllers
                 return HttpNotFound();
             }
             twr.Id = tab.Id;
-            twr.AverageRating  = tab.Rating/tab.TotalRaters;
-           
+            twr.ArtistName = tab.Song.Artist.Name;
+            twr.SongName = tab.Song.Name;
+            twr.Staff1 = tab.Staff1;
+            twr.Staff2 = tab.Staff2;
+            twr.Staff3 = tab.Staff3;
+            twr.Staff4 = tab.Staff4;
+            twr.Staff5 = tab.Staff5;
+            twr.Staff6 = tab.Staff6;
+            twr.Staff7 = tab.Staff7;
+            twr.Staff8 = tab.Staff8;
+            twr.Staff9 = tab.Staff9;
+            twr.Staff10 = tab.Staff10;
+
+            twr.AverageRating = tab.Rating / tab.TotalRaters;
+
             return View(twr);
         }
 
-        //public ActionResult _Rating()
-        //{
-        //    return View("Details"); 
-        //}
 
         [HttpPost]
-      public ActionResult _Rating(TablatureRating model, int? id)
+        public ActionResult _Rating(TablatureRating model, int? id, string url)
         {
             Tablature tab = db.Tabulatures.Find(id);
+
+            ApplicationUser user =
+                System.Web.HttpContext.Current.GetOwinContext()
+                    .GetUserManager<ApplicationUserManager>()
+                    .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+
             TablatureRating rating = new TablatureRating
             {
                 Rating = model.Rating,
                 TablatureID = tab.Id,
                 Tablature = tab,
-
+                UserId = user.Id
             };
+
+
             tab.TotalRaters = db.TablatureRatings.Count(t => t.TablatureID == rating.TablatureID);
             tab.Rating += rating.Rating;
+
+            //var ratedBefore =
+            //    db.TablatureRatings.Select(x => x).Where(t => t.TablatureID == rating.Id).Select(y => y.UserId);
+
+            //var uRating = db.TablatureRatings.Select(x => x).FirstOrDefault(y => y.UserId == rating.UserId);
+
             TablatureWithRating twr = new TablatureWithRating
             {
                 Id = rating.TablatureID,
                 Rating = rating.Rating,
                 TotalRaters = tab.TotalRaters,
-                //AverageRating = tab.Rating / tab.TotalRaters
+                //UserRating = uRating.Rating,
+
+
             };
 
             db.TablatureRatings.Add(rating);
             db.SaveChanges();
 
-            return RedirectToAction("Details", new {id = twr.Id});
-
+            return RedirectToAction("Details", new { id = twr.Id });
         }
 
 
 
 
 
-
-
-        //[HttpPost]
-        //public string Details([Bind(Include = "Id,TablatureID,Rating")] TablatureRating model, int? id)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        /*db.Tabulatures.Select(x => x).FirstOrDefault(t => t.Id == model.TablatureID)*/
-
-        //        Tablature tab = db.Tabulatures.Find(id);
-
-        //        TablatureRating rating = new TablatureRating
-        //        {
-        //            Rating = model.Rating,
-        //            TablatureID = tab.Id,
-        //            Tablature = tab
-        //        };
-
-        //        db.TablatureRatings.Add(rating);
-
-        //        db.SaveChanges();
-        //        return View("")
-        //    }
-
-        //}
-
-        // GET: Tabulatures/Create
         public ActionResult Create(int? id)
         {
             ViewBag.SongId = new SelectList(db.Songs, "Id", "Name");
@@ -175,35 +173,44 @@ namespace Coda.Controllers
             return View();
         }
 
-        // POST: Tabulatures/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "Id,Content,SongId")] Tablature tablature)
+        //[ValidateInput(false)]
+        public ActionResult Create(/*[Bind(Include = "Id,Content,SongId")]*/ Tablature tab)
         {
             ApplicationUser user =
                 System.Web.HttpContext.Current.GetOwinContext()
                     .GetUserManager<ApplicationUserManager>()
                     .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
             MemberProfile profile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Email == user.Email);
+
             if (ModelState.IsValid)
             {
                 Tablature tabToAdd = new Tablature
                 {
-                    Content = tablature.Content,
-                    Song = db.Songs.Select(x => x).FirstOrDefault(t => t.Id == tablature.SongId),
+                    Staff1 = tab.Staff1,
+                    Staff2 = tab.Staff2,
+                    Staff3 = tab.Staff3,
+                    Staff4 = tab.Staff4,
+                    Staff5 = tab.Staff5,
+                    Staff6 = tab.Staff6,
+                    Staff7 = tab.Staff7,
+                    Staff8 = tab.Staff8,
+                    Staff9 = tab.Staff9,
+                    Staff10 = tab.Staff10,
+                    Song = db.Songs.Select(x => x).FirstOrDefault(t => t.Id == tab.SongId),
                     TimeCreated = DateTime.Now,
                     MemberProfile = profile,
 
                 };
+
                 db.Tabulatures.Add(tabToAdd);
-                //db.Tabulatures.Add(Tablature);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(tablature);
+            return View(tab);
         }
 
         // GET: Tabulatures/Edit/5
@@ -274,7 +281,17 @@ namespace Coda.Controllers
 
         public ActionResult Top10()
         {
+            //Tablature tab = db.Tabulatures.Find(id);
+            //tab.Song.Name = twr.SongName;
+            //tab.PageViews = twr.PageViews;
+            //List<>
+
             List<Tablature> top10 = db.Tabulatures.Select(x => x).OrderByDescending(t => t.PageViews).Take(10).ToList();
+            foreach (var t in top10)
+            {
+                t.AverageRating = t.Rating/t.TotalRaters;
+            }
+            
             return View(top10);
         }
 

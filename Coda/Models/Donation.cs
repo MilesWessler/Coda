@@ -5,13 +5,10 @@ using System.Web;
 
 namespace Coda.Models
 {
-    public class TablatureRating
+    public class Donation
     {
         public int Id { get; set; }
-        public int? TablatureID { get; set; }
-        public double Rating { get; set; }
         public string UserId { get; set; }
-
-        public virtual Tablature Tablature { get; set; }
+        public double Amount { get; set; }
     }
 }

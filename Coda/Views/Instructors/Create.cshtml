@@ -4,32 +4,20 @@
     ViewBag.Title = "Create";
 }
 
-<link href="~/kindeditor/themes/default/default.css" rel="stylesheet" />
-<script src="~/kindeditor/kindeditor-all-min.js"></script>
-<script>
-    KindEditor.ready(function (K) {
-        window.editor = K.create('#editor_id');
-    });
-</script>
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    <br/>
+    <br/>
 
-    <div class="form-horizontal">
-       
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <h3>Are You Interested in Becoming an Instructor?</h3>
+    <h5>Just Fill Out the Form Below...</h5>
+    <div class="form-horizontal" style="margin-top: 10%; margin-bottom: 30%">
+        
+
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
         <div class="form-group">
             @Html.Label("Hourly Rate", htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
@@ -39,17 +27,23 @@
         </div>
 
         <br/>
+        <br/>
+        <br/>
 
         <div class="form-group">
-            @Html.Label("About Me", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("About Me", htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Content, 50, 200, new { @id = "editor_id", style = "width: 75%; max-width: 75%; height: 500px; max-height: 100%" })
-               </div>
+                @Html.TextAreaFor(model => model.Content, new
+                {
+                    style = "width: 669px; height: 292px; font-size: 22px; font-weight: bold; outline-color: black; border: 1px solid black;",
+                    placeholder = "Tell us about your experience as an instructor..."
+                })
+            </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default"/>
             </div>
         </div>
     </div>

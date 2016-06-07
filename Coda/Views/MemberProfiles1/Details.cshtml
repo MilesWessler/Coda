@@ -4,121 +4,103 @@
 @{
     ViewBag.Title = @Html.DisplayFor(model => model.UserName) + " Profile Page";
 }
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 
+<div style="margin-top: 10%; margin-bottom: 40%">
+    <div class="editor-field " align="center" style="margin-bottom: 10%">
+        @{
+            if (Model.Image != null)
+            {
+                string imageBase64 = Convert.ToBase64String(Model.Image);
+                string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                <img src="@imageSrc" class="rcorners" />}
+        }
+        <br />
+        <br />
 
-<div class="editor-field " align="center">
-    @{
-        if (Model.Image != null)
+        <h3>
+            @Html.DisplayName(Model.UserName)
+        </h3>
+    </div>
+
+    <h4>About @Html.DisplayName(Model.UserName)</h4>
+    <dd style="font-size: 22px;">
+        @Html.DisplayFor(model => model.AboutMe)
+    </dd>
+    <hr />
+    <h4>Musical Preferences</h4>
+
+    <dl style="text-align: justify; font-size: 22px; ">
+
+        @if (Model.Rock != false)
         {
-            string imageBase64 = Convert.ToBase64String(Model.Image);
-            string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-            <img src="@imageSrc" class="rcorners" />}
-    }
-    <br/>
-    <br/>
+            <dd>
+                @Html.DisplayNameFor(model => model.Rock)
+            </dd>
 
-    <h4>
-        @Html.DisplayName(Model.UserName)
-    </h4>
+
+        }
+        @if (Model.ClassicRock != false)
+        {
+            <dd>
+                @Html.DisplayNameFor(model => model.ClassicRock)
+            </dd>
+
+
+        }
+        @if (Model.PunkRock != false)
+        {
+            <dd>
+                @Html.DisplayNameFor(model => model.PunkRock)
+            </dd>
+
+
+        }
+        @if (Model.Grunge != false)
+        {
+            <dd>
+                @Html.DisplayNameFor(model => model.Grunge)
+            </dd>
+
+        }
+        @if (Model.Metal != false)
+        {
+            <dd>
+                @Html.DisplayNameFor(model => model.Metal)
+            </dd>
+        }
+        @if (Model.Blues != false)
+        {
+            <dd>
+                @Html.DisplayNameFor(model => model.Blues)
+            </dd>
+        }
+        @if (Model.RAndB != false)
+        {
+            <dd>
+                @Html.DisplayNameFor(model => model.RAndB)
+            </dd>
+        }
+        @if (Model.Pop)
+        {
+            <dd>
+                @Html.DisplayNameFor(model => model.Pop)
+            </dd>
+        }
+        @if (Model.Alternative != false)
+        {
+
+            <dd>
+                @Html.DisplayNameFor(model => model.Alternative)
+            </dd>
+        }
+    </dl>
+    <hr />
+    <h4 >Contact @Html.DisplayFor(model => model.UserName) at :</h4>
+    <dd style="font-size: 22px;">
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+
 </div>
-
-<h4 style="color: #42dca3">About Me</h4>
-<dd style="font-size: 22px; color:white">
-    @Html.DisplayFor(model => model.AboutMe)
-</dd>
-<hr />
-<h4 style="color:  #42dca3">Musical Preferences</h4>
-
-<dl style="text-align: justify; font-size: 22px; color:white">
-
-    @if (Model.Rock != false)
-    {
-        <dd>
-            @Html.DisplayNameFor(model => model.Rock)
-        </dd>
-
-
-    }
-    @if (Model.ClassicRock != false)
-    {
-        <dd>
-            @Html.DisplayNameFor(model => model.ClassicRock)
-        </dd>
-
-
-    }
-    @if (Model.PunkRock != false)
-    {
-        <dd>
-            @Html.DisplayNameFor(model => model.PunkRock)
-        </dd>
-
-
-    }
-    @if (Model.Grunge != false)
-    {
-        <dd>
-            @Html.DisplayNameFor(model => model.Grunge)
-        </dd>
-
-    }
-    @if (Model.Metal != false)
-    {
-        <dd>
-            @Html.DisplayNameFor(model => model.Metal)
-        </dd>
-    }
-    @if (Model.Blues != false)
-    {
-        <dd>
-            @Html.DisplayNameFor(model => model.Blues)
-        </dd>
-    }
-    @if (Model.RAndB != false)
-    {
-        <dd>
-            @Html.DisplayNameFor(model => model.RAndB)
-        </dd>
-    }
-    @if (Model.Pop)
-    {
-        <dd>
-            @Html.DisplayNameFor(model => model.Pop)
-        </dd>
-    }
-    @if (Model.Alternative != false)
-    {
-
-        <dd>
-            @Html.DisplayNameFor(model => model.Alternative)
-        </dd>
-    }
-</dl>
-<hr />
-<h4 style="color: #42dca3">Contact @Html.DisplayFor(model => model.UserName) at :</h4>
-<dd style="font-size: 22px; color: white">
-    @Html.DisplayFor(model => model.Email)
-</dd>
-
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 
 
 

@@ -1,44 +1,50 @@
 ﻿@model IEnumerable<Coda.Models.Song>
-    @{
-        ViewBag.Title = "Index";
-    }
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            }
-
-            @Html.ActionLink("Tabs", "Index", "Tablatures", new { id = item.Id }, null)
-        </td>
-    </tr>
+@{
+    ViewBag.Title = "Index";
 }
 
-</table>
+<div style="margin-top: 10%; margin-bottom: 5%">
+    <h3>"Your <b style="color: lightcoral">Heart</b> is Just a Beatbox for the <b style="color: lightblue">Song</b> of Life."</h3>
+    <h5> Sandi Thom</h5>
+</div>
+<div >
+    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <ul>
+                            <li>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </li>
+                        </ul>
+                    }
+                    @Html.ActionLink("Tabs", "Index", "Tablatures", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

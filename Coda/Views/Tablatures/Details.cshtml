@@ -9,22 +9,9 @@
 <br />
 <br />
 <br />
-<br />
-<br />
-<br />
-<br />
 
-<h3 align="center">
-    @*@Html.DisplayName(Model.Tablature.Song.Artist.Name + ": " + Model.Tablature.Song.Name)*@
-</h3>
-<br />
-
-@*<div>
-        @Html.Partial("_Rating")
-    </div>*@
 
 <link href="~/Content/bootstrap-rating.css" rel="stylesheet" />
-@*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
 <script src="~/Scripts/bootstrap-rating/bootstrap-rating.min.js"></script>
 @section scripts
 {
@@ -55,11 +42,79 @@
 }
 
 
-<div id="container">
-    
-
+<div id="container" align="right">
     @Html.Partial("_Rating", Model)
 </div>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<script src="~/Scripts/jtab/jquery.js" type="text/javascript"></script>
+<script src="~/Scripts/jtab/raphael.js" type="text/javascript"></script>
+<script src="~/Scripts/jtab/jtab.js" type="text/javascript"></script>
+
+<h2 align="center">
+    @Html.DisplayName(Model.SongName + " Tab")
+</h2>
+<h4 align="center">
+    @Html.DisplayName("By " + Model.ArtistName)
+</h4>
+<br/>
+<br/>
+<br />
+
+<div class="jtab">@Html.DisplayFor(m => m.Staff1)</div>
+<div class="jtab">@Html.DisplayFor(m => m.Staff2)</div>
+<div class="jtab">@Html.DisplayFor(m => m.Staff3)</div>
+<div class="jtab">@Html.DisplayFor(m => m.Staff4)</div>
+<div class="jtab">@Html.DisplayFor(m => m.Staff5)</div>
+<div class="jtab">@Html.DisplayFor(m => m.Staff6)</div>
+<div class="jtab">@Html.DisplayFor(m => m.Staff7)</div>
+<div class="jtab">@Html.DisplayFor(m => m.Staff8)</div>
+<div class="jtab">@Html.DisplayFor(m => m.Staff9)</div>
+<div class="jtab">@Html.DisplayFor(m => m.Staff10)</div>
+<br />
+<br />
+<br/>
+<br />
+<br />
+<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @*<div id="container">

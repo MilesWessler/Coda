@@ -2,17 +2,17 @@
 
 
 
-<link href="~/Content/bootstrap-rating.css" rel="stylesheet" />
-<script src="~/Scripts/bootstrap-rating/bootstrap-rating.min.js"></script>
+    <link href="~/Content/bootstrap-rating.css" rel="stylesheet"/>
+    <script src="~/Scripts/bootstrap-rating/bootstrap-rating.min.js"></script>
 @section scripts
 {
     <script>
-        $(function () {
-            $('input.check').on('change', function () {
+        $(function() {
+            $('input.check').on('change', function() {
                 alert('Rating: ' + $(this).val());
             });
             $('.rating-tooltip').rating({
-                extendSymbol: function (rate) {
+                extendSymbol: function(rate) {
                     $(this).tooltip({
                         container: 'body',
                         placement: 'bottom',
@@ -20,35 +20,43 @@
                     });
                 }
             });
-            $('.rating').each(function () {
+            $('.rating').each(function() {
                 $('<span class="label label-default"></span>')
                     .text($(this).val() || ' ')
                     .insertAfter(this);
             });
-            $('.rating').on('change', function () {
+            $('.rating').on('change', function() {
                 $(this).next('.label').text($(this).val());
             });
         });
     </script>
 }
 
-<div id="container">
 
-    @using (Ajax.BeginForm("_Rating", "Tablatures", null, new AjaxOptions
-    {
-        LoadingElementId = "rate",
-        HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
-    {
-        <div class="form-group">
-            <b style="color: white">Average Rating</b> <br />@Html.BootstrapRating().Value(Math.Round(Model.AverageRating, 2)).Fractions(4).ReadOnly
-            <span id="rate">
+
+    <div id="container">
+        @using (Ajax.BeginForm("_Rating", "Tablatures", null, new AjaxOptions
+        {
+            LoadingElementId = "rate",
+            HttpMethod = "Post",
+            InsertionMode = InsertionMode.Replace
+        }))
+        {
+            if (double.IsNaN(Model.AverageRating))
+            {
+                <p>Be the first to rate this tab</p>
+            }
+            <div class="form-group">
+                <b style="color: black">Average Rating</b> <br/>@Html.BootstrapRating().Value(Math.Round(Model.AverageRating, 2)).Fractions(4).ReadOnly
+                <span id="rate">
                 @Html.HiddenFor(m => m.Id)
-                <br/>
-                <br/>
-                <b style="color: white">Your Rating</b> <br/>
-                @Html.BootstrapRating(m => m.Rating).Value(Model.Rating).Fractions(4).Class("rating-tooltip")
+                <br />
+                <br />
+                <b style="color: white">Your Rating</b> <br />
+                @Html.BootstrapRating(m => m.Rating).Value(Model.UserRating).Fractions(4).Class("rating-tooltip")
             </span>
-            <input type="submit" class="btn btn-success btn-sm" value="Submit"/>
-        </div>
-    }
-</div>
+                <input type="submit" class="btn btn-success btn-sm" value="Submit"/>
+            </div>
+        }
+    </div>
+

@@ -16,11 +16,19 @@ namespace Coda.Models
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime TimeCreated { get; set; }
         public int TotalRaters { get; set; }
-        public IQueryable<double> AverageRating { get; set; }
+        public double AverageRating { get; set; }
         public int PageViews { get; set; }
-        public string Message { get; set; }
-        //public int? TablatureRatingId { get; set; }
-        //public virtual TablatureRating TablatureRating { get; set; }
+        public string Staff1 { get; set; }
+        public string Staff2 { get; set; }
+        public string Staff3 { get; set; }
+        public string Staff4 { get; set; }
+        public string Staff5 { get; set; }
+        public string Staff6 { get; set; }
+        public string Staff7 { get; set; }
+        public string Staff8 { get; set; }
+        public string Staff9 { get; set; }
+        public string Staff10 { get; set; }
+
         public virtual MemberProfile MemberProfile { get; set; }
 
         public virtual List<TablatureRating> TablatureRatings { get; set; }

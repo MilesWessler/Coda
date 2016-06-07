@@ -7,49 +7,83 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles", required: false)
 
 </head>
 <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Coda", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a href='@Url.Action("Index", "Home")'>
+                    <img style="width: 100px; height: 60px" src='@Url.Content("~/Images/coda1.jpg")' />
+                </a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                   
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                        <li>@Html.ActionLink("Artists", "Index", "Artists")</li>
-                        <li>@Html.ActionLink("Songs", "Index", "Songs")</li>
-                        <li>@Html.ActionLink("Top 10 Tabs", "Top10", "Tablatures")</li>
-                        <li>@Html.ActionLink("Flagged Tabs", "FlaggedTabs", "Tablatures")</li>
-                        <li>@Html.ActionLink("Top Rated Tabs", "TopRatedTabs", "Tablatures")</li>
-                    }
-                    else
-                    {
-                        <li>@Html.ActionLink("Artists", "Index", "Artists")</li>
-                        <li>@Html.ActionLink("Songs", "Index", "Songs")</li>
-                        <li>@Html.ActionLink("Top 10 Tabs", "Top10", "Tablatures")</li>
-                        <li>@Html.ActionLink("Profile", "Create", "MemberProfiles1")</li>
-                        <li>@Html.ActionLink("Connect", "Index", "MemberProfiles1")</li>
-                        <li>@Html.ActionLink("Instructors", "Index", "Instructors")</li>
-                    }
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" style="margin-left: 30px">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Learn <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Tabs By Artist", "Index", "Artists")</li>
+                            <li>@Html.ActionLink("Tabs by Song", "Index", "Songs")</li>
+                            <li>@Html.ActionLink("Top 10 Tabs", "Top10", "Tablatures")</li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Teach <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Add a New Tab", "Create", "Tablatures")</li>
+                            <li>@Html.ActionLink("Become an Instructor", "Create", "Instructors")</li>
+
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Connect <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            @*DONT FOGET TO ADD TO THE ADMIN VIEW LATER!!!*@
+                            @*<li>@Html.ActionLink("Flagged Tabs", "FlaggedTabs", "Tablatures")</li>
+                                <li>@Html.ActionLink("Top Rated Tabs", "TopRatedTabs", "Tablatures")</li>*@
+
+
+                            <li>@Html.ActionLink("Create Your Member Profile", "Create", "MemberProfiles1")</li>
+                            <li>@Html.ActionLink("Connect With Other Members", "Index", "MemberProfiles1")</li>
+                            <li>@Html.ActionLink("Instructors Nearby", "Index", "Instructors")</li>
+
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Media <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Coda Blog", "Index", "BlogPosts")</li>
+                            <li>@Html.ActionLink("Donate", "Donate", "PayPal")</li>
+                        </ul>
+                    </li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 50px">
+                    @Html.Partial("_LoginPartial")
+                </ul>
             </div>
         </div>
-    </div>
+    </nav>
+
     <div class="container body-content">
         @RenderBody()
-     
+        <hr />
+        <footer>
+            <h4 align="center" style="bottom: 0; position: relative">&copy; @DateTime.Now.Year - Coda</h4>
+        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

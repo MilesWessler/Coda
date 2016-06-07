@@ -1,47 +1,44 @@
 ﻿@model IEnumerable<Coda.Models.UserViewModel>
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+<div style="margin-top: 10%; margin-bottom: 40%">
+
+
+    @*@if (!Model.Any())
+        {
+            <h2>You currently have no connections </h2>
+            <h4>Please be sure to fill out your <a href="@Url.Action("Create", "MemberProfiles1")">Member Profile</a> if you haven't already. Otherwise please be sure to check back soon!</h4>
+
+        }
+        else
+        {*@
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+        <h2>Instructors Near You</h2>
+        <hr />
+
+        foreach (var item in Model)
+        {
+            if (item.Image != null)
+            {
+                string imageBase64 = Convert.ToBase64String(item.Image);
+                string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                <ul class="demo-1 effect">
+                    <li>
+                        <h2>@Html.DisplayFor(m => item.UserName)</h2>
+                        <p>@Html.DisplayFor(m => item.Content)</p>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Details", "MemberProfiles1", new {id = item.UserId})"><img src="@imageSrc" class="top" style="width: 340px; height: 227px" /></a>
+                    </li>
+                </ul>
+            }
+        }
+    }
+</div>
 
 
 
-<h3 style="color: #42dca3">Instructors Near You</h3>
-<hr />
-<br />
-<br />
-<br />
-<br/>
-
-
-@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-
-    foreach (var item in Model)
-    {
-        <ul style="display: inline;">
-           
-            @*<div class="editor-label" style="color: #42dca3; font-size: 22px; font-weight: bold;">
-                @Html.DisplayFor(modelItem => item.UserName)
-                <br />
-            </div>*@
-          
-                <li style="display: inline-table; margin: 20px 20px 20px 20px">
-
-                    @{
-                        if (item.Image != null)
-                        {
-                            string imageBase64 = Convert.ToBase64String(item.Image);
-                            string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-                            <a href="@Url.Action("Details", "Instructors", new {id = item.UserId})"><img src="@imageSrc" class="rcorners" width="300" height="300" style="padding: 1px; border: solid white; background-color: #42dca3;" /></a>
-                        }
-                    }
-                </li>
-          
-        </ul>
-
-                        }
-                    }   
+@section Styles {
+    <link href="@Url.Content("~/Content/boxshadow.css")" rel="stylesheet" type="text/css" />
+}

@@ -3,44 +3,43 @@
 @{
     ViewBag.Title = "Top10";
 }
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<h2 style="color: #42dca3">Top 10</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Song.Name)
-        </th>
-        <th>Rating</th>
-        <th>Page Views</th>
-        <th>Link</th>
-    </tr>
+<link href="~/Content/bootstrap-rating.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-rating/bootstrap-rating.min.js"></script>
 
-    @foreach (var item in Model)
-    {
+<div align="center" style="margin-top: 5%; margin-bottom: 5%">
+    <h3>"I Am <b style="color: lightcoral">Easily</b> Satisfied With The Very<b style="color: lightblue"> Best</b>"
+    </h3>
+    <h5>Winston Churchill</h5>
+</div>
+
+<div style="margin-bottom: 10%">
+    <h3>Top 10</h3>
+    <br/>
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Song.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PageViews)
-            </td>
-            <td>
-                @Html.ActionLink("Tab", "Details", new { id = item.Id })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Song.Name)
+            </th>
+            <th>Average Rating</th>
+            <th>Page Views</th>
+            <th>Link</th>
         </tr>
-    }
-
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Song.Name)
+                </td>
+                <td>
+                    @Html.BootstrapRating(modelItem => item.AverageRating).Fractions(4).ReadOnly
+                <td>
+                    @Html.DisplayFor(modelItem => item.PageViews)
+                </td>
+                <td>
+                    @Html.ActionLink("Tab", "Details", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

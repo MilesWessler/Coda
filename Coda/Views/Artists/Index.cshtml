@@ -2,62 +2,62 @@
 
 @{
     ViewBag.Title = "Index";
-  
+
 }
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+<div align="center" style="margin-top: 5%; margin-bottom: 5%">
+    <h3>
+        "Learn The Rules Like A <b style="color: lightcoral">Pro</b> So You Can Break Them Like An<b style="color: lightblue"> Artist</b>"
+    </h3>
+    <h5>Pablo Picaso</h5>
+</div>
 
-@if (Request.IsAuthenticated && User.IsInRole("Admin"))
-{
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-}
-<p>
-@for (int y = 0; y < 26; y++)
-{
-    char filter = Convert.ToChar(65 + y);
-    string letter = filter.ToString();
+<div style="margin-top: 10%; margin-bottom: 10%">
 
-    if (y == 27)
+    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
     {
-        letter = "All";
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
     }
-     
-    @Html.ActionLink(letter + " ", "Index", new { letter = letter});
-   }
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @for (int y = 0; y < 26; y++)
+        {
+            char filter = Convert.ToChar(65 + y);
+            string letter = filter.ToString();
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            if (y == 27)
             {
-                @Html.ActionLink("Edit", "Edit", new {id = item.Id})
-                @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                letter = "All";
             }
-            @Html.ActionLink("Songs", "Index", "Songs", new { id = item.Id }, null)
-        </td>
-    </tr>
-}
 
-</table>
+            @Html.ActionLink(letter + " ", "Index", new { letter = letter });
+        }
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    }
+                    @Html.ActionLink("Songs", "Index", "Songs", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

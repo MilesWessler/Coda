@@ -55,6 +55,7 @@ namespace Coda.Controllers
                 profiles.ForEach(x => usersNearby.Add(new UserViewModel
                 {
                     Image = x.Image,
+                    Content = x.AboutMe,
                     UserName = x.UserName,
                     Email = x.Email,
                     ZipCode = x.ZipCode,

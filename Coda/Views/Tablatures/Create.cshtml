@@ -3,46 +3,222 @@
 @{
     ViewBag.Title = "Create";
 }
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 
-<link href="~/kindeditor/themes/default/default.css" rel="stylesheet" />
-<script src="~/kindeditor/kindeditor-all-min.js"></script>
-<script>
-    KindEditor.ready(function(K) {
-        window.editor = K.create('#editor_id');
-    });
-</script>
-
+<h2>Create New Tab</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Add Tablature</h4>
+
         <hr />
-        @*@Html.Hidden("SongId", (string)ViewBag.SongId)*@
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <script src="~/Scripts/jtab/jquery.js" type="text/javascript"></script>
+        <script src="~/Scripts/jtab/raphael.js" type="text/javascript"></script>
+        <script src="~/Scripts/jtab/jtab.js" type="text/javascript"></script>
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.SongId, "Songs", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-3">
-                @Html.DropDownList("SongId", null, htmlAttributes: new { @class = "form-control" })
+            <label class="control-label col-md-2">Song Title</label>
+            <div class="col-md-10">
+                @Html.DropDownList("SongId", null, htmlAttributes: new { @class = "form-control", style="width: 281px" })
                 @Html.ValidationMessageFor(model => model.SongId, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+        <br />
+    <br/>
+       
+    <div class="form-group">
+            <label class="control-label col-md-2">Stave 1</label>
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Content, 50, 200, new { @id = "editor_id", style = "width: 100%; max-width: 100%;" })
-                @*@Html.TextAreaFor(model => model.Content, new {@id = "editor_id", @rows = 50, @cols = 50})*@
+                @Html.TextAreaFor(m => m.Staff1, new { id = "notation1", style="outline-color: black; border: 1px solid black; width: 281px; height: 49px "})
+                @*@Html.ValidationMessageFor(model => model.Staff1, "", new { @class = "text-danger" })*@
             </div>
         </div>
+
+        <div id="tab1"></div>
+        <script type='text/javascript'>
+            $('#notation1').keyup(function (e) {
+                jtab.render($('#tab1'), $(this).val());
+            });
+        </script>
+
+        <br />
+        <br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Stave 2</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Staff2, new { id = "notation2", style = "outline-color: black; border: 1px solid black; width: 281px; height: 49px " })
+                @*@Html.ValidationMessageFor(model => model.Staff2, "", new {@class = "text-danger"})*@
+            </div>
+        </div>
+
+        <div id="tab2"></div>
+
+        <script type='text/javascript'>
+            $('#notation2').keyup(function (e) {
+                jtab.render($('#tab2'), $(this).val());
+            });
+        </script>
+
+        <br />
+        <br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Stave 3</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Staff3, new { id = "notation3", style = "outline-color: black; border: 1px solid black; width: 281px; height: 49px " })
+                @Html.ValidationMessageFor(model => model.Staff3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="tab3"></div>
+
+        <script type='text/javascript'>
+            $('#notation3').keyup(function (e) {
+                jtab.render($('#tab3'), $(this).val());
+            });
+        </script>
+
+        <br />
+        <br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Stave 4</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Staff4, new { id = "notation4", style = "outline-color: black; border: 1px solid black; width: 281px; height: 49px " })
+                @Html.ValidationMessageFor(model => model.Staff4, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="tab4"></div>
+
+        <script type='text/javascript'>
+            $('#notation4').keyup(function (e) {
+                jtab.render($('#tab4'), $(this).val());
+            });
+        </script>
+
+        <br />
+        <br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Stave 5</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Staff5, new { id = "notation5", style = "outline-color: black; border: 1px solid black; width: 281px; height: 49px " })
+                @Html.ValidationMessageFor(model => model.Staff5, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="tab5"></div>
+
+        <script type='text/javascript'>
+            $('#notation5').keyup(function (e) {
+                jtab.render($('#tab5'), $(this).val());
+            });
+        </script>
+
+        <br />
+        <br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Stave 6</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Staff6, new { id = "notation6", style = "outline-color: black; border: 1px solid black; width: 281px; height: 49px " })
+                @Html.ValidationMessageFor(model => model.Staff6, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="tab6"></div>
+
+        <script type='text/javascript'>
+            $('#notation6').keyup(function (e) {
+                jtab.render($('#tab6'), $(this).val());
+            });
+        </script>
+
+        <br />
+        <br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Stave 7</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Staff7, new { id = "notation7", style = "outline-color: black; border: 1px solid black; width: 281px; height: 49px " })
+                @Html.ValidationMessageFor(model => model.Staff7, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="tab7"></div>
+
+        <script type='text/javascript'>
+            $('#notation7').keyup(function (e) {
+                jtab.render($('#tab7'), $(this).val());
+            });
+        </script>
+
+        <br />
+        <br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Stave 8</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Staff8, new { id = "notation8", style = "outline-color: black; border: 1px solid black; width: 281px; height: 49px " })
+                @Html.ValidationMessageFor(model => model.Staff8, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="tab8"></div>
+
+        <script type='text/javascript'>
+            $('#notation8').keyup(function (e) {
+                jtab.render($('#tab8'), $(this).val());
+            });
+        </script>
+
+        <br />
+        <br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Stave 9</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Staff9, new { id = "notation9", style = "outline-color: black; border: 1px solid black; width: 281px; height: 49px " })
+                @Html.ValidationMessageFor(model => model.Staff9, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="tab9"></div>
+
+        <script type='text/javascript'>
+            $('#notation9').keyup(function (e) {
+                jtab.render($('#tab9'), $(this).val());
+            });
+        </script>
+
+        <br />
+        <br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Stave 10</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Staff10, new { id = "notation10", style = "outline-color: black; border: 1px solid black; width: 281px; height: 49px " })
+                @Html.ValidationMessageFor(model => model.Staff10, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="tab10"></div>
+
+        <script type='text/javascript'>
+            $('#notation10').keyup(function (e) {
+                jtab.render($('#tab10'), $(this).val());
+            });
+        </script>
+
+        <br />
+        <br />
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -54,7 +230,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

@@ -7,6 +7,9 @@ namespace Coda.Models
 {
     public class IndexViewModel
     {
+        public int DonationId { get; set; }
+        public string UserId { get; set; }
+        public double? DonationAmount { get; set; }
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
         public string PhoneNumber { get; set; }

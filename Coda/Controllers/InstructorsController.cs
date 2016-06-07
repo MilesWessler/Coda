@@ -36,7 +36,9 @@ namespace Coda.Controllers
                 Image = x.MemberProfile.Image,
                 UserName = x.MemberProfile.UserName,
                 Email = x.MemberProfile.Email,
+                Content = x.Content,
                 UserId = x.Id
+                
             }));
             return View(instructorViewModel);
         }

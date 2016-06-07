@@ -93,6 +93,10 @@
       <HintPath>..\packages\Jmelosegui.Mvc.Googlemap.0.8.0.0\lib\net45\Jmelosegui.Mvc.GoogleMap.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -116,6 +120,10 @@
     </Reference>
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PayPal, Version=1.7.3.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.7.3\lib\net451\PayPal.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -253,7 +261,7 @@
     <Compile Include="Controllers\FileTableController.cs" />
     <Compile Include="Controllers\InstructorsController.cs" />
     <Compile Include="Controllers\MemberProfiles1Controller.cs" />
-    <Compile Include="Controllers\RatingController.cs" />
+    <Compile Include="Controllers\PayPalController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Extensions\Extension.cs" />
     <Compile Include="Extensions\ImageHelper.cs" />
@@ -263,6 +271,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BlogPost.cs" />
+    <Compile Include="Models\Donation.cs" />
     <Compile Include="Models\FileTable.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -292,6 +301,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SongWithScore.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\Configuration.cs" />
     <Compile Include="Utilities\DistanceFinder.cs" />
     <Compile Include="ViewModels\InstructorViewModel.cs" />
     <Compile Include="ViewModels\TablatureWithRating.cs" />
@@ -302,20 +312,27 @@
     <Content Include="Content\Blog\css\clean-blog.css" />
     <Content Include="Content\Blog\css\clean-blog.min.css" />
     <Content Include="Content\bootstrap-cyborg.css" />
+    <Content Include="Content\bootstrap-journal.css" />
     <Content Include="Content\bootstrap-rating.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\boxshadow.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\jtab\jtab-helper.css" />
+    <Content Include="Content\jtab\jtab-site.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\rotating-words.css" />
+    <Content Include="Content\searchbox.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\coachella.jpg" />
+    <Content Include="Images\coda1.jpg" />
     <Content Include="Images\concert1.jpg" />
     <Content Include="Images\drums.jpg" />
     <Content Include="Images\guitar.jpg" />
@@ -328,7 +345,13 @@
     <Content Include="Scripts\bootstrap-rating\bootstrap-rating.js" />
     <Content Include="Scripts\bootstrap-rating\bootstrap-rating.min.js" />
     <Content Include="Scripts\jmelosegui.googlemap.js" />
+    <Content Include="Scripts\jtab\guitartabs.js" />
+    <Content Include="Scripts\jtab\jquery.js" />
+    <Content Include="Scripts\jtab\jtab.js" />
+    <Content Include="Scripts\jtab\prototype.js" />
+    <Content Include="Scripts\jtab\raphael.js" />
     <Content Include="Scripts\markerclusterer.js" />
+    <Content Include="Scripts\tab.js" />
     <Content Include="startbootstrap\css\grayscale.css" />
     <Content Include="startbootstrap\img\fender.jpg" />
     <Content Include="startbootstrap\img\guitar.jpg" />
@@ -682,7 +705,6 @@
     <Content Include="Views\Songs\Details.cshtml" />
     <Content Include="Views\Songs\Edit.cshtml" />
     <Content Include="Views\Songs\Index.cshtml" />
-    <Content Include="Views\Tablatures\Create.cshtml" />
     <Content Include="Views\Tablatures\Delete.cshtml" />
     <Content Include="Views\Tablatures\Details.cshtml" />
     <Content Include="Views\Tablatures\Edit.cshtml" />
@@ -763,9 +785,16 @@
     <Content Include="Views\BlogPosts\Index.cshtml" />
     <Content Include="Views\Instructors\InfoWindow.cshtml" />
     <Content Include="startbootstrap\README.md" />
+    <Content Include="Views\PayPal\Failure.cshtml" />
+    <Content Include="Views\PayPal\Success.cshtml" />
+    <Content Include="Views\PayPal\NewDonation.cshtml" />
+    <Content Include="Views\PayPal\Donate.cshtml" />
+    <Content Include="Views\PayPal\PreviousDonation.cshtml" />
     <None Include="Views\Shared\HomePageView.cshtml" />
     <Content Include="Views\Tablatures\_Rating.cshtml" />
     <Content Include="Views\Tablatures\_NewRating.cshtml" />
+    <Content Include="Views\Tablatures\Test.cshtml" />
+    <Content Include="Views\Tablatures\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

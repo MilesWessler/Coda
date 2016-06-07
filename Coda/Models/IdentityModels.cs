@@ -38,7 +38,7 @@ namespace Coda.Models
 
         public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<TablatureRating> TablatureRatings { get; set; }
-
+        public DbSet<Donation> Donations { get; set; }
 
 
 

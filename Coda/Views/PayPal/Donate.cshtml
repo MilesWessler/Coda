@@ -1,0 +1,51 @@
+﻿@model Coda.Models.IndexViewModel
+@{
+    ViewBag.Title = "Donate";
+}
+<br/>
+<br/>
+<br/>
+<br />
+
+<h2>@ViewBag.Title</h2>
+<p class="text-success">@ViewBag.StatusMessage</p>
+@Html.AntiForgeryToken()
+
+<table class="table">
+    <tr>
+        <th>
+           Donation Amount
+        </th>
+       <tr>
+        <td>
+            $@Html.DisplayFor(modelItem => modelItem.DonationAmount)
+        </td>
+        <td>
+            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="business" value="devmileswessler-facilitator@gmail.com">
+                <input type="hidden" name="lc" value="US">
+                <input type="hidden" name="item_name" value="Donation">
+                <input type="hidden" name="amount" value=@Html.DisplayFor(modelItem => modelItem.DonationAmount)>
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="button_subtype" value="services">
+                <input type="hidden" name="tax_rate" value="0">
+                <input type="hidden" name="shipping" value="0">
+                <input type="hidden" name="return" value="https://localhost:44393">
+                <input type="hidden" name="cbt" value="Return to Coda" src="https://localhost:44393">
+                <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+                <input type="hidden" class="btn btn-default" />
+                <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+        </td>
+</table>
+<div>
+
+    <br />
+</div>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        @*<input type="submit" value="Purchase" class="btn btn-default" />*@
+    </div>
+</div>
