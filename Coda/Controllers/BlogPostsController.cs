@@ -15,7 +15,7 @@ namespace Coda.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: BlogPosts
-        public ActionResult Index()
+        public ActionResult CodaBlogHome()
         {
             var data = db.BlogPosts.ToList();
             List<BlogPost> blogPosts = data.OrderByDescending(b => b.Id).ToList();
@@ -24,7 +24,7 @@ namespace Coda.Controllers
         }
 
         // GET: BlogPosts/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult CodaBlogArticle(int? id)
         {
             if (id == null)
             {
@@ -39,7 +39,7 @@ namespace Coda.Controllers
         }
 
         // GET: BlogPosts/Create
-        public ActionResult Create()
+        public ActionResult NewArticle()
         {
             return View();
         }
@@ -49,7 +49,7 @@ namespace Coda.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "Id,Title,SubHeading,Author,DateTime,Body")] BlogPost blogPost, HttpPostedFileBase file)
+        public ActionResult NewArticle([Bind(Include = "Id,Title,SubHeading,Author,DateTime,Body")] BlogPost blogPost, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace Coda.Controllers
 
                 db.BlogPosts.Add(blogPostToAdd);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("CodaBlogHome");
             }
 
             return View(blogPost);
@@ -142,7 +142,7 @@ namespace Coda.Controllers
             BlogPost blogPost = db.BlogPosts.Find(id);
             db.BlogPosts.Remove(blogPost);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("CodaBlogHome");
         }
 
         protected override void Dispose(bool disposing)

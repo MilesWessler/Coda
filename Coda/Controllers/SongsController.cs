@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Coda.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Coda.Models;
 
 namespace Coda.Controllers
 {
@@ -15,7 +12,7 @@ namespace Coda.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Songs
-        public ActionResult Index(int? id)
+        public ActionResult SongIndex(int? id)
         {
             if (id == null)
             {
@@ -27,23 +24,7 @@ namespace Coda.Controllers
             }
         }
 
-        // GET: Songs/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Song song = db.Songs.Find(id);
-            if (song == null)
-            {
-                return HttpNotFound();
-            }
-            return View(song);
-        }
-
-        // GET: Songs/Create
-        public ActionResult Create()
+        public ActionResult CreateNewSong()
         {
             ViewBag.ArtistId = new SelectList(db.Artists, "Id", "Name");
             return View();
@@ -54,7 +35,7 @@ namespace Coda.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,ArtistId")] Song song)
+        public ActionResult CreateNewSong([Bind(Include = "Id,Name,ArtistId")] Song song)
         {
 
             if (ModelState.IsValid)
@@ -66,7 +47,7 @@ namespace Coda.Controllers
                 };
                 db.Songs.Add(songToAdd);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("SongIndex");
             }
 
             return View(song);
@@ -98,7 +79,7 @@ namespace Coda.Controllers
             {
                 db.Entry(song).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("SongIndex");
             }
             return View(song);
         }
@@ -126,7 +107,7 @@ namespace Coda.Controllers
             Song song = db.Songs.Find(id);
             db.Songs.Remove(song);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("SongIndex");
         }
 
         protected override void Dispose(bool disposing)

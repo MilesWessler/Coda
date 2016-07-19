@@ -17,7 +17,7 @@
     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
     {
         <p>
-            @Html.ActionLink("Create New", "Create")
+            @Html.ActionLink("Create New", "NewArtist")
         </p>
     }
     <p>
@@ -31,7 +31,7 @@
                 letter = "All";
             }
 
-            @Html.ActionLink(letter + " ", "Index", new { letter = letter });
+            @Html.ActionLink(letter + " ", "ArtistIndex", new { letter = letter });
         }
     </p>
     <table class="table">
@@ -55,13 +55,13 @@
 
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                         @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-                        @Html.ActionLink("Songs", "Index", "Songs", new { id = item.Id }, null)
+                        @Html.ActionLink("Songs", "SongIndex", "Songs", new { id = item.Id }, null)
                     </td>
                 }
                 else
                 {
                     <td>
-                        @Html.ActionLink("Songs", "Index", "Songs", new { id = item.Id }, null)
+                        @Html.ActionLink("Songs", "SongIndex", "Songs", new { id = item.Id }, null)
                     </td>
                 }
             </tr>

@@ -6,7 +6,7 @@
 
 <div class="tabs-index">
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "CreateNewTab")
     </p>
     <table class="table">
         <tr>
@@ -20,7 +20,7 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(item.Song.Name, "Details", new { id = item.Id })
+                    @Html.ActionLink(item.Song.Name, "ViewTab", new { id = item.Id })
                 </td>
                 <td>
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))

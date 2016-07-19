@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Coda.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,12 +9,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Coda.Models;
-using Coda.Utilities;
-using Coda.ViewModels;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using ZipCodeCoords;
 
 namespace Coda.Controllers
 {
@@ -22,7 +19,7 @@ namespace Coda.Controllers
 
 
         // GET: Instructors
-        public ActionResult Index()
+        public ActionResult InstructorsNearYou()
         {
             List<Instructor> instructors = db.Instructor.Select(x => x).ToList();
 
@@ -47,7 +44,7 @@ namespace Coda.Controllers
         }
 
         // GET: Instructors/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult InstructorDetails(int? id)
         {
 
             if (id == null)
@@ -63,7 +60,7 @@ namespace Coda.Controllers
         }
 
         // GET: Instructors/Create
-        public ActionResult Create()
+        public ActionResult NewInstructor()
         {
 
             return View();
@@ -74,7 +71,7 @@ namespace Coda.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(
+        public ActionResult NewInstructor(
             [Bind(Include = "Id,Content,InstructorSince,MemberId,PricePerHour,Instrument")] Instructor instructor)
         {
             if (ModelState.IsValid)
@@ -99,7 +96,7 @@ namespace Coda.Controllers
                 db.Instructor.Add(profileToAdd);
                 db.SaveChanges();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "Home");
             }
 
             return View(instructor);
@@ -131,7 +128,7 @@ namespace Coda.Controllers
             {
                 db.Entry(instructor).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("InstructorsNearYou");
             }
             return View(instructor);
         }
@@ -159,7 +156,7 @@ namespace Coda.Controllers
             Instructor instructor = db.Instructor.Find(id);
             db.Instructor.Remove(instructor);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("InstructorsNearYou");
         }
 
         protected override void Dispose(bool disposing)

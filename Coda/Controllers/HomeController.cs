@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using Coda.Models;
 using System.Web.Mvc;
-using Coda.Models;
 
 namespace Coda.Controllers
 {
@@ -12,26 +7,11 @@ namespace Coda.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Index()
+        public ActionResult Home()
         {
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Events()
-        {
-            return View();
-        }
-        public ActionResult Test()
-        {
-            return View();
-        }
 
         //public ActionResult Contact()
         //{

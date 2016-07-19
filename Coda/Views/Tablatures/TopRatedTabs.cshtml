@@ -10,7 +10,7 @@
 <h2>Top Rated Tabs</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateNewTab")
 </p>
 <table class="table" style="margin-bottom: 30%">
     <tr>
@@ -52,7 +52,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Details", "ViewTab", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>

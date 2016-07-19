@@ -19,7 +19,7 @@ namespace Coda.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
 
-        public ActionResult Index(int? id)
+        public ActionResult Connections(int? id)
         {
 
             ApplicationUser user =
@@ -73,7 +73,7 @@ namespace Coda.Controllers
         }
 
         // GET: MemberProfiles1/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult MemberProfile(int? id)
         {
             if (id == null)
             {
@@ -88,7 +88,7 @@ namespace Coda.Controllers
         }
 
         // GET: MemberProfiles1/Create
-        public ActionResult Create()
+        public ActionResult BecomeAMember()
         {
             return View();
         }
@@ -98,7 +98,7 @@ namespace Coda.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Address,ZipCode,Rock,ClassicRock,PunkRock,Grunge,Metal,Blues,RAndB,Pop,Alternative,ConnectWithOtherMembers,UserId,Image,UserName,AboutMe")] MemberProfile memberProfile, HttpPostedFileBase file)
+        public ActionResult BecomeAMember([Bind(Include = "Id,Address,ZipCode,Rock,ClassicRock,PunkRock,Grunge,Metal,Blues,RAndB,Pop,Alternative,ConnectWithOtherMembers,UserId,Image,UserName,AboutMe")] MemberProfile memberProfile, HttpPostedFileBase file)
         {
 
             if (ModelState.IsValid)
@@ -139,7 +139,7 @@ namespace Coda.Controllers
                     db.MemberProfiles.Add(profileToAdd);
                     //db.MemberProfiles.Add(memberProfile);
                     db.SaveChanges();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Home", "Home");
                 }
             }
 
@@ -172,7 +172,7 @@ namespace Coda.Controllers
             {
                 db.Entry(memberProfile).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Connections");
             }
             return View(memberProfile);
         }
@@ -200,7 +200,7 @@ namespace Coda.Controllers
             MemberProfile memberProfile = db.MemberProfiles.Find(id);
             db.MemberProfiles.Remove(memberProfile);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Connections");
         }
 
         protected override void Dispose(bool disposing)

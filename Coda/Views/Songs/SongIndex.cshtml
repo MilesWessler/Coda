@@ -12,7 +12,7 @@
     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
     {
         <p>
-            @Html.ActionLink("Create New", "Create")
+            @Html.ActionLink("Create New", "CreateNewSong")
         </p>
     }
     <table class="table">
@@ -39,13 +39,13 @@
                                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                             </li>
                             <li>
-                                @Html.ActionLink("Tabs", "Index", "Tablatures", new { id = item.Id }, null)
+                                @Html.ActionLink("Tabs", "TablatureIndex", "Tablatures", new { id = item.Id }, null)
                             </li>
                         </ul>
                     }
                     else
                     {
-                        @Html.ActionLink("Tabs", "Index", "Tablatures", new { id = item.Id }, null)
+                        @Html.ActionLink("Tabs", "TablatureIndex", "Tablatures", new { id = item.Id }, null)
                     }
                 </td>
             </tr>

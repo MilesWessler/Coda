@@ -1,23 +1,15 @@
-﻿using System;
+﻿using Coda.Models;
+using Coda.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Data.SqlClient;
-using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Services;
-using Coda.Models;
-using Coda.Models.Repository;
-using Coda.ViewModels;
-using DevExpress.DashboardCommon.DataProcessing.InMemoryDataProcessor.Executors;
-using DevExpress.Web;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 
 namespace Coda.Controllers
@@ -27,7 +19,7 @@ namespace Coda.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Tabulatures
-        public ActionResult Index(int? id)
+        public ActionResult TablatureIndex(int? id)
         {
             if (id == null)
             {
@@ -84,7 +76,7 @@ namespace Coda.Controllers
 
         //}
 
-        public ActionResult Details(int? id, TablatureWithRating twr)
+        public ActionResult ViewTab(int? id, TablatureWithRating twr)
         {
             if (id == null)
             {
@@ -98,7 +90,7 @@ namespace Coda.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             twr.Id = tab.Id;
             twr.ArtistName = tab.Song.Artist.Name;
             twr.SongName = tab.Song.Name;
@@ -148,18 +140,18 @@ namespace Coda.Controllers
                 TotalRaters = tab.TotalRaters,
                 UserId = rating.UserId
             };
-           
+
             db.TablatureRatings.Add(rating);
             db.SaveChanges();
 
-            return RedirectToAction("Details", new { id = twr.Id });
+            return RedirectToAction("ViewTab", new { id = twr.Id });
         }
 
 
 
 
 
-        public ActionResult Create(int? id)
+        public ActionResult CreateNewTab(int? id)
         {
             ViewBag.SongId = new SelectList(db.Songs, "Id", "Name");
             //ViewBag.SongId = id;
@@ -169,7 +161,7 @@ namespace Coda.Controllers
 
         [HttpPost]
         //[ValidateInput(false)]
-        public ActionResult Create(/*[Bind(Include = "Id,Content,SongId")]*/ Tablature tab)
+        public ActionResult CreateNewTab(/*[Bind(Include = "Id,Content,SongId")]*/ Tablature tab)
         {
             ApplicationUser user =
                 System.Web.HttpContext.Current.GetOwinContext()
@@ -200,7 +192,7 @@ namespace Coda.Controllers
 
                 db.Tabulatures.Add(tabToAdd);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("TablatureIndex");
             }
 
             return View(tab);
@@ -232,7 +224,7 @@ namespace Coda.Controllers
             {
                 db.Entry(tablature).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("TablatureIndex");
             }
             return View(tablature);
         }
@@ -260,7 +252,7 @@ namespace Coda.Controllers
             Tablature tablature = db.Tabulatures.Find(id);
             db.Tabulatures.Remove(tablature);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("TablatureIndex");
         }
 
         protected override void Dispose(bool disposing)

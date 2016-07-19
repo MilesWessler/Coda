@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Coda.Models.BlogPost>
+﻿@model Coda.Models.BlogPost
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Coda Blog Article";
     Layout = null;
 }
 
@@ -14,6 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Coda Blog</title>
+    <!-- Bootstrap Core CSS -->
     @Styles.Render("~/Content/Blog/css/bootstrap.min.css")
     @Styles.Render("~/Content/Blog/css/clean-blog.min.css")
     <!-- Custom Fonts -->
@@ -26,11 +27,19 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .blogimg {
+            max-width: 100%;
+            width: auto;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -38,70 +47,68 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @*<a class="navbar-brand" href="index.html">Back to Coda</a>*@
+
             </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-
                     <li>
-                        @Html.ActionLink("Back to Coda", "Index", "Home", null, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Coda Blog Home", "CodaBlogHome", "BlogPosts", new { @class = "navbar-brand", @style = "color: black " })
                     </li>
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                        <li>
-                            @Html.ActionLink("Create New Post", "Create", "BlogPosts")
-                        </li>
-                    }
                     <li>
-                </ul>
+                        @Html.ActionLink("Back to Coda", "Home", "Home", null, new { @class = "navbar-brand", @style = "color: black " })
+                    </li>
+                  </ul>
             </div>
+            <!-- /.navbar-collapse -->
         </div>
+        <!-- /.container -->
     </nav>
 
-    <header class="intro-header" style="background-image: url('../../Images/concert1.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1 style="color: white ; text-shadow: 3px 0 0 lightblue, -3px 0 0 lightblue, 0 3px 0 lightblue, 0 -2px 0 lightblue, 2px 2px lightblue, -2px -2px 0 lightblue, 2px -2px 0 lightblue, -2px 2px 0 lightblue;">Coda Blog</h1>
-                        @*<span style="font: font-size: 30px; color: white; text-shadow: 1px 0 0  #42dca3  " class="subheading">When words leave off, music begins - Heinrich Heine</span>*@
-                    </div>
-                </div>
+    <br />
+    <br />
+    <br />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+                <h1 style="color: white; text-shadow: 3px 0 0 lightblue, -3px 0 0 lightblue, 0 3px 0 lightblue, 0 -2px 0 lightblue, 2px 2px lightblue, -2px -2px 0 lightblue, 2px -2px 0 lightblue, -2px 2px 0 lightblue;">@Html.DisplayFor(model => model.Title)</h1>
             </div>
         </div>
-    </header>
-    @foreach (var item in Model)
-    {
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="post-preview">
-                        <a href="@Url.Action("Details", "BlogPosts", new {id = item.Id})">
-                            <h2 class="post-title">
-                                @Html.DisplayFor(model => item.Title)
-                            </h2>
-                            <h3 class="post-subtitle">
-                                @Html.DisplayFor(model => item.SubHeading)
-                            </h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by <b style="font-weight: bold">@Html.DisplayFor(model => item.Author)</b> on <b>@Html.DisplayFor(model => item.DateTime)</b>
-                        </p>
-                    </div>
-                </div>
-                <div class="blogcrud">
+    </div>
+</div>
 
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id })*@
-                        <br />
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    }
+    <br />
+    <br />
+    <br />
+  
+
+<div class="editor-field" align="center">
+    @if (Model.Image != null)
+    {
+        string imageBase64 = Convert.ToBase64String(Model.Image);
+        string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+        <img src="@imageSrc" class="blogimg" style="padding: 1px; border: solid;"/>
+    }
+</div>
+
+    <br />
+    <br />
+    <br />
+   
+
+<article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <span style="font-family: cursive" class="meta">Posted by <b>@Html.DisplayFor(model => model.Author)</b> on <b> @Html.DisplayFor(model => model.DateTime)</b></span>
+                    <p style="font-size: 22px">@Html.DisplayFor(model => model.Body)</p>
                 </div>
             </div>
         </div>
-        <hr />
-    }
+    </article>
+    <hr>
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
@@ -132,14 +139,15 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; Coda 2016</p>
+                    <p class="copyright text-muted">Copyright &copy; Coda @DateTime.Now</p>
                 </div>
             </div>
         </div>
     </footer>
-    @Scripts.Render("~/Scripts/Blog/jquery.js")
-    @Scripts.Render("~/Scripts/Blog/bootstrap.min.js")
-    @Scripts.Render("~/Scripts/Blog/clean-blog.min.js")
+    <!-- jQuery -->
+    @Scripts.Render("~~/startbootstrap/js/jquery.js")
+    @Scripts.Render("~/startbootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/startbootstrap/js/clean-blog.min.js")
 
 </body>
 </html>

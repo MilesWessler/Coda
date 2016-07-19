@@ -1,7 +1,7 @@
 ﻿@model Coda.ViewModels.TablatureWithRating
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Tab";
 }
 
 
@@ -106,28 +106,9 @@
 
 
 
-@*<div id="container">
-    <div class="col-md-10">
 
-        @using (Ajax.BeginForm("Details", "Tablatures", null, new AjaxOptions
-        {
-            LoadingElementId = "rating",
-            HttpMethod = "POST",
-            InsertionMode = InsertionMode.Replace
-        }))
-        {
-            <div >
-                @Html.HiddenFor(m => m.Id)
-                @Html.BootstrapRating().Value(Model.AverageRating).Fractions(4)
-              <input type="submit" class="btn btn-success btn-sm" value="Submit" />
-            </div>
-        }
-    </div>
-</div>
-<div id="rating">
-        @Html.BootstrapRating(m => m.Rating).ReadOnly
-  
-    </div>*@
+
+
 
 
 

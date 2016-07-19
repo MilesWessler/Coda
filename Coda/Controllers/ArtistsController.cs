@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Coda.Models;
+using Coda.Models.Repository;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Coda.Models;
-using Coda.Models.Repository;
 
 namespace Coda.Controllers
 {
@@ -16,7 +13,7 @@ namespace Coda.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Artists
-        public ActionResult Index(string letter)
+        public ActionResult ArtistIndex(string letter)
         {
             if (letter == null)
             {
@@ -44,7 +41,7 @@ namespace Coda.Controllers
         }
 
         // GET: Artists/Create
-        public ActionResult Create()
+        public ActionResult NewArtist()
         {
             return View();
         }
@@ -54,13 +51,13 @@ namespace Coda.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Artist artist)
+        public ActionResult NewArtist([Bind(Include = "Id,Name")] Artist artist)
         {
             if (ModelState.IsValid)
             {
                 db.Artists.Add(artist);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ArtistIndex");
             }
 
             return View(artist);
@@ -92,7 +89,7 @@ namespace Coda.Controllers
             {
                 db.Entry(artist).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ArtistIndex");
             }
             return View(artist);
         }
@@ -120,7 +117,7 @@ namespace Coda.Controllers
             Artist artist = db.Artists.Find(id);
             db.Artists.Remove(artist);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ArtistIndex");
         }
 
         protected override void Dispose(bool disposing)

@@ -27,7 +27,7 @@
                              <p>@Html.DisplayFor(m => item.Content)</p>
                          </li>
                          <li>
-                             <a href="@Url.Action("Details", "MemberProfiles", new {id = item.UserId})"><img src="@imageSrc" class="top" style="width: 340px; height: 227px"/></a>
+                             <a href="@Url.Action("MemberProfile", "MemberProfiles", new {id = item.UserId})"><img src="@imageSrc" class="top" style="width: 340px; height: 227px"/></a>
                          </li>
                      </ul>
                  }
