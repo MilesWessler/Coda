@@ -4,12 +4,6 @@
     ViewBag.Title = "Details";
 }
 
-<br />
-<br />
-<br />
-<br />
-<br />
-
 
 <link href="~/Content/bootstrap-rating.css" rel="stylesheet" />
 <script src="~/Scripts/bootstrap-rating/bootstrap-rating.min.js"></script>
@@ -57,25 +51,20 @@
     @Html.DisplayName("By " + Model.ArtistName)
 </h4>
 <br/>
-<br/>
-<br />
 
-<div class="jtab">@Html.DisplayFor(m => m.Staff1)</div>
-<div class="jtab">@Html.DisplayFor(m => m.Staff2)</div>
-<div class="jtab">@Html.DisplayFor(m => m.Staff3)</div>
-<div class="jtab">@Html.DisplayFor(m => m.Staff4)</div>
-<div class="jtab">@Html.DisplayFor(m => m.Staff5)</div>
-<div class="jtab">@Html.DisplayFor(m => m.Staff6)</div>
-<div class="jtab">@Html.DisplayFor(m => m.Staff7)</div>
-<div class="jtab">@Html.DisplayFor(m => m.Staff8)</div>
-<div class="jtab">@Html.DisplayFor(m => m.Staff9)</div>
-<div class="jtab">@Html.DisplayFor(m => m.Staff10)</div>
-<br />
-<br />
-<br/>
-<br />
-<br />
-<br />
+<div class="tab-staves">
+    <div class="jtab">@Html.DisplayFor(m => m.Staff1)</div>
+    <div class="jtab">@Html.DisplayFor(m => m.Staff2)</div>
+    <div class="jtab">@Html.DisplayFor(m => m.Staff3)</div>
+    <div class="jtab">@Html.DisplayFor(m => m.Staff4)</div>
+    <div class="jtab">@Html.DisplayFor(m => m.Staff5)</div>
+    <div class="jtab">@Html.DisplayFor(m => m.Staff6)</div>
+    <div class="jtab">@Html.DisplayFor(m => m.Staff7)</div>
+    <div class="jtab">@Html.DisplayFor(m => m.Staff8)</div>
+    <div class="jtab">@Html.DisplayFor(m => m.Staff9)</div>
+    <div class="jtab">@Html.DisplayFor(m => m.Staff10)</div>
+</div>
+
 
 
 

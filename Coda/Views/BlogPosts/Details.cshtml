@@ -52,15 +52,12 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        @Html.ActionLink("Home", "Index", "BlogPosts", new { @class = "navbar-brand", @style = "color: black " })
+                        @Html.ActionLink("Coda Blog Home", "Index", "BlogPosts", new { @class = "navbar-brand", @style = "color: black " })
                     </li>
                     <li>
-                        @Html.ActionLink("Back to Coda", "Index", "Home", new { @class = "navbar-brand", @style = "color: black " })
+                        @Html.ActionLink("Back to Coda", "Index", "Home", null, new { @class = "navbar-brand", @style = "color: black " })
                     </li>
-                    <li>
-                        @Html.ActionLink("Contact", "Index", "Home", new { @class = "navbar-brand", @style = "color: black " })
-                    </li>
-                </ul>
+                  </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -80,7 +77,7 @@
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 style="color: white; text-shadow: 3px 0 0 #42dca3, -3px 0 0 #42dca3, 0 3px 0 #42dca3, 0 -2px 0 #42dca3, 2px 2px #42dca3, -2px -2px 0 #42dca3, 2px -2px 0 #42dca3, -2px 2px 0 #42dca3;">@Html.DisplayFor(model => model.Title)</h1>
+                <h1 style="color: white; text-shadow: 3px 0 0 lightblue, -3px 0 0 lightblue, 0 3px 0 lightblue, 0 -2px 0 lightblue, 2px 2px lightblue, -2px -2px 0 lightblue, 2px -2px 0 lightblue, -2px 2px 0 lightblue;">@Html.DisplayFor(model => model.Title)</h1>
             </div>
         </div>
     </div>
@@ -89,8 +86,7 @@
     <br />
     <br />
     <br />
-    <br />
-    <br />
+  
 
 <div class="editor-field" align="center">
     @if (Model.Image != null)

@@ -8,13 +8,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Clean Blog</title>
+    <title>Coda Blog</title>
     @Styles.Render("~/Content/Blog/css/bootstrap.min.css")
     @Styles.Render("~/Content/Blog/css/clean-blog.min.css")
     <!-- Custom Fonts -->
@@ -32,7 +31,6 @@
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -42,24 +40,22 @@
                 </button>
                 @*<a class="navbar-brand" href="index.html">Back to Coda</a>*@
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+
                     <li>
-                        @Html.ActionLink("Create New Post", "Create", "BlogPosts")
+                        @Html.ActionLink("Back to Coda", "Index", "Home", null, new { @class = "navbar-brand" })
                     </li>
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li>
-                            @Html.ActionLink("Home", "Index", "BlogPosts", new { @class = "navbar-brand", @style = "color: black " })
+                            @Html.ActionLink("Create New Post", "Create", "BlogPosts")
                         </li>
                     }
                     <li>
-</ul>
+                </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
     </nav>
 
     <header class="intro-header" style="background-image: url('../../Images/concert1.jpg')">
@@ -67,14 +63,13 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                        <h1 style="color: white ; text-shadow: 3px 0 0 #42dca3, -3px 0 0 #42dca3, 0 3px 0 #42dca3, 0 -2px 0 #42dca3, 2px 2px #42dca3, -2px -2px 0 #42dca3, 2px -2px 0 #42dca3, -2px 2px 0 #42dca3;">Coda Blog</h1>
-                       @*<span style="font: font-size: 30px; color: white; text-shadow: 1px 0 0  #42dca3  " class="subheading">When words leave off, music begins - Heinrich Heine</span>*@
+                        <h1 style="color: white ; text-shadow: 3px 0 0 lightblue, -3px 0 0 lightblue, 0 3px 0 lightblue, 0 -2px 0 lightblue, 2px 2px lightblue, -2px -2px 0 lightblue, 2px -2px 0 lightblue, -2px 2px 0 lightblue;">Coda Blog</h1>
+                        @*<span style="font: font-size: 30px; color: white; text-shadow: 1px 0 0  #42dca3  " class="subheading">When words leave off, music begins - Heinrich Heine</span>*@
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
     @foreach (var item in Model)
     {
         <div class="container">
@@ -89,26 +84,24 @@
                                 @Html.DisplayFor(model => item.SubHeading)
                             </h3>
                         </a>
-                        <p class="post-meta">Posted by <b style="font-weight: bold">@Html.DisplayFor(model => item.Author)</b> on <b>@Html.DisplayFor(model => item.DateTime)</b></p>
+                        <p class="post-meta">
+                            Posted by <b style="font-weight: bold">@Html.DisplayFor(model => item.Author)</b> on <b>@Html.DisplayFor(model => item.DateTime)</b>
+                        </p>
                     </div>
+                </div>
+                <div class="blogcrud">
+
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id })*@
+                        <br />
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    }
                 </div>
             </div>
         </div>
-        <div align="right">
-            
-            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-            {
-                @Html.ActionLink("Edit", "Edit", new {id = item.Id})
-                <br/>
-                @Html.ActionLink("Delete", "Delete", new {id = item.Id})
-            }
-        </div>
         <hr />
     }
-
-
-
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
@@ -144,8 +137,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- jQuery -->
     @Scripts.Render("~/Scripts/Blog/jquery.js")
     @Scripts.Render("~/Scripts/Blog/bootstrap.min.js")
     @Scripts.Render("~/Scripts/Blog/clean-blog.min.js")

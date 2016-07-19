@@ -4,8 +4,6 @@
 @{
     int songId = 0; 
 }
-
-
    
     @foreach (var item in Model)
     {
@@ -18,4 +16,5 @@
         @Html.Action("Index", "Songs", new {id=songId})
 
     }
+
 

@@ -17,6 +17,8 @@ namespace Coda.Models
         public string BusinessAddress { get; set; }
         public string State { get; set; }
         public string City { get; set; }
+        public int NumberOfTabPosts { get; set; }
+        public bool HasPayed { get; set; }
         public virtual MemberProfile MemberProfile { get; set; }
 
     }

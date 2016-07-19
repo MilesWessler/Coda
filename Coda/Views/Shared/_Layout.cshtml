@@ -50,15 +50,9 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Connect <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            @*DONT FOGET TO ADD TO THE ADMIN VIEW LATER!!!*@
-                            @*<li>@Html.ActionLink("Flagged Tabs", "FlaggedTabs", "Tablatures")</li>
-                                <li>@Html.ActionLink("Top Rated Tabs", "TopRatedTabs", "Tablatures")</li>*@
-
-
-                            <li>@Html.ActionLink("Create Your Member Profile", "Create", "MemberProfiles1")</li>
-                            <li>@Html.ActionLink("Connect With Other Members", "Index", "MemberProfiles1")</li>
+                            <li>@Html.ActionLink("Create Your Member Profile", "Create", "MemberProfiles")</li>
+                            <li>@Html.ActionLink("Connect With Other Members", "Index", "MemberProfiles")</li>
                             <li>@Html.ActionLink("Instructors Nearby", "Index", "Instructors")</li>
-
                         </ul>
                     </li>
 
@@ -66,9 +60,24 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Media <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Coda Blog", "Index", "BlogPosts")</li>
-                            <li>@Html.ActionLink("Donate", "Donate", "PayPal")</li>
+                            <li>@Html.ActionLink("Donate", "NewDonation", "PayPal")</li>
                         </ul>
                     </li>
+
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Flagged Tabs", "FlaggedTabs", "Tablatures")</li>
+                                <li>@Html.ActionLink("Top Rated Tabs", "TopRatedTabs", "Tablatures")</li>
+                                <li>@Html.ActionLink("Create New Song", "Create", "Songs")</li>
+                                <li>@Html.ActionLink("Create New Artist", "Create", "Artists")</li>
+
+                            </ul>
+                        </li>
+
+                    }
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right" style="margin-right: 50px">

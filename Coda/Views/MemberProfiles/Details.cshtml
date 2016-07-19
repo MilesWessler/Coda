@@ -5,6 +5,20 @@
     ViewBag.Title = @Html.DisplayFor(model => model.UserName) + " Profile Page";
 }
 
+<style>
+    .member-image {
+        width: 400px;
+        height: 300px;
+        border: 2px solid #fff;
+        -moz-box-shadow: 10px 10px 5px #ccc;
+        -webkit-box-shadow: 10px 10px 5px #ccc;
+        box-shadow: 10px 10px 5px #ccc;
+        -moz-border-radius: 25px;
+        -webkit-border-radius: 25px;
+        border-radius: 25px;
+    }
+</style>
+
 <div style="margin-top: 10%; margin-bottom: 40%">
     <div class="editor-field " align="center" style="margin-bottom: 10%">
         @{
@@ -12,7 +26,7 @@
             {
                 string imageBase64 = Convert.ToBase64String(Model.Image);
                 string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-                <img src="@imageSrc" class="rcorners" />}
+                <img src="@imageSrc" class="member-image" />}
         }
         <br />
         <br />

@@ -98,6 +98,7 @@ namespace Coda.Controllers
             {
                 return HttpNotFound();
             }
+            
             twr.Id = tab.Id;
             twr.ArtistName = tab.Song.Artist.Name;
             twr.SongName = tab.Song.Name;
@@ -137,25 +138,17 @@ namespace Coda.Controllers
                 UserId = user.Id
             };
 
-
             tab.TotalRaters = db.TablatureRatings.Count(t => t.TablatureID == rating.TablatureID);
             tab.Rating += rating.Rating;
-
-            //var ratedBefore =
-            //    db.TablatureRatings.Select(x => x).Where(t => t.TablatureID == rating.Id).Select(y => y.UserId);
-
-            //var uRating = db.TablatureRatings.Select(x => x).FirstOrDefault(y => y.UserId == rating.UserId);
 
             TablatureWithRating twr = new TablatureWithRating
             {
                 Id = rating.TablatureID,
                 Rating = rating.Rating,
                 TotalRaters = tab.TotalRaters,
-                //UserRating = uRating.Rating,
-
-
+                UserId = rating.UserId
             };
-
+           
             db.TablatureRatings.Add(rating);
             db.SaveChanges();
 
@@ -289,9 +282,9 @@ namespace Coda.Controllers
             List<Tablature> top10 = db.Tabulatures.Select(x => x).OrderByDescending(t => t.PageViews).Take(10).ToList();
             foreach (var t in top10)
             {
-                t.AverageRating = t.Rating/t.TotalRaters;
+                t.AverageRating = t.Rating / t.TotalRaters;
             }
-            
+
             return View(top10);
         }
 
@@ -304,15 +297,16 @@ namespace Coda.Controllers
 
         public ActionResult FlaggedTabs()
         {
+
             List<Tablature> flag =
-                db.Tabulatures.Select(x => x).Where(x => x.Rating < 4).OrderByDescending(x => x.Rating).ToList();
+               db.Tabulatures.Select(x => x).Where(x => x.AverageRating < 4).OrderByDescending(x => x.AverageRating).ToList();
             return View(flag);
         }
 
         public ActionResult TopRatedTabs()
         {
             List<Tablature> top10 =
-                db.Tabulatures.Select(x => x).Where(x => x.Rating >= 4).OrderByDescending(x => x.Rating).ToList();
+                db.Tabulatures.Select(x => x).Where(x => x.AverageRating >= 4).OrderByDescending(x => x.AverageRating).ToList();
             return View(top10);
         }
 

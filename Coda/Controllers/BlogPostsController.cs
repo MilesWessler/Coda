@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Coda.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Coda.Models;
 
 namespace Coda.Controllers
 {
@@ -105,21 +104,20 @@ namespace Coda.Controllers
             return View(blogPost);
         }
 
-        // POST: BlogPosts/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,SubHeading,Author,DateTime,Body")] BlogPost blogPost)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(blogPost).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(blogPost);
-        }
+        //Debug Later
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,Title,SubHeading,Author,DateTime,Body")] BlogPost blogPost)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(blogPost).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(blogPost);
+        //}
 
         // GET: BlogPosts/Delete/5
         public ActionResult Delete(int? id)

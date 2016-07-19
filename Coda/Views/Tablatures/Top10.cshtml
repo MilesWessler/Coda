@@ -7,15 +7,16 @@
 <link href="~/Content/bootstrap-rating.css" rel="stylesheet" />
 <script src="~/Scripts/bootstrap-rating/bootstrap-rating.min.js"></script>
 
-<div align="center" style="margin-top: 5%; margin-bottom: 5%">
-    <h3>"I Am <b style="color: lightcoral">Easily</b> Satisfied With The Very<b style="color: lightblue"> Best</b>"
+<div align="center" class="top10-quote">
+    <h3>
+        "I Am <b style="color: lightcoral">Easily</b> Satisfied With The Very<b style="color: lightblue"> Best</b>"
     </h3>
     <h5>Winston Churchill</h5>
 </div>
 
 <div style="margin-bottom: 10%">
     <h3>Top 10</h3>
-    <br/>
+    <br />
     <table class="table">
         <tr>
             <th>
@@ -32,7 +33,11 @@
                     @Html.DisplayFor(modelItem => item.Song.Name)
                 </td>
                 <td>
-                    @Html.BootstrapRating(modelItem => item.AverageRating).Fractions(4).ReadOnly
+
+                    @{
+                        item.AverageRating = Math.Round(item.Rating / (item.TotalRaters + 1), 2);
+                    }
+                    @Html.DisplayFor(modelItem => item.AverageRating)
                 <td>
                     @Html.DisplayFor(modelItem => item.PageViews)
                 </td>
@@ -40,6 +45,6 @@
                     @Html.ActionLink("Tab", "Details", new { id = item.Id })
                 </td>
             </tr>
-        }
+                        }
     </table>
 </div>

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Coda.Models;
 using Coda.Utilities;
+using Coda.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using ZipCodeCoords;
@@ -18,7 +19,7 @@ namespace Coda.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-   
+
 
         // GET: Instructors
         public ActionResult Index()
@@ -30,6 +31,7 @@ namespace Coda.Controllers
             ViewBag.Long = db.MemberProfiles.Select(x => x.Latitude);
             ViewBag.Lat = db.MemberProfiles.Select(x => x.Longitude);
 
+            //var numberPosts = db.Instructor.Select(x => x.NumberOfTabPosts);
 
             instructors.ForEach(x => instructorViewModel.Add(new UserViewModel
             {
@@ -37,16 +39,17 @@ namespace Coda.Controllers
                 UserName = x.MemberProfile.UserName,
                 Email = x.MemberProfile.Email,
                 Content = x.Content,
-                UserId = x.Id
-                
+                UserId = x.Id,
+                NumberOfPosts = x.NumberOfTabPosts
             }));
+
             return View(instructorViewModel);
         }
 
         // GET: Instructors/Details/5
         public ActionResult Details(int? id)
         {
-            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -76,7 +79,7 @@ namespace Coda.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<string> instruments = new List<string> {"Guitar", "Bass", "Drums", "Vocals"};
+                List<string> instruments = new List<string> { "Guitar", "Bass", "Drums", "Vocals" };
 
                 ViewBag.Instruments = new SelectList(instruments);
 
@@ -168,48 +171,122 @@ namespace Coda.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult FindInstructors()
-        {
-            ApplicationUser user =
-                System.Web.HttpContext.Current.GetOwinContext()
-                    .GetUserManager<ApplicationUserManager>()
-                    .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            Instructor profile = db.Instructor.Select(x => x).FirstOrDefault(t => t.MemberProfile.Email == user.Email);
+        //public ActionResult Index(int? id)
+        //{
 
-            List<Instructor> profiles = db.Instructor.Select(x => x).ToList();
-            profiles =
-                profiles.Select(x => x)
-                    .Where(
-                        t =>
-                            profile != null &&
-                            DistanceFinder.FindDistanceBetweenCoordinates(profile.MemberProfile.Latitude,
-                                profile.MemberProfile.Longitude, t.MemberProfile.Latitude,
-                                t.MemberProfile.Longitude) <= 20)
-                    .ToList();
-            profiles.Remove(profile);
-            return View(profiles);
-        }
-        public ActionResult InfoWindow()
-        {
-            return View();
-        }
+        //    ApplicationUser user =
+        //        System.Web.HttpContext.Current.GetOwinContext()
+        //            .GetUserManager<ApplicationUserManager>()
+        //            .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+        //    Instructor profile = db.Instructor.Select(x => x).FirstOrDefault(t => t.MemberProfile.Email == user.Email);
+
+        //    if (profile != null && profile.NumberOfTabPosts > 5)
+        //    {
+        //        List<Instructor> profiles = db.Instructor.Select(x => x).ToList();
+        //        profiles =
+        //            profiles.Select(x => x)
+        //                .Where(
+        //                    t =>
+        //                        DistanceFinder.FindDistanceBetweenCoordinates(profile.MemberProfile.Latitude, profile.MemberProfile.Longitude,
+        //                            t.MemberProfile.Latitude, t.MemberProfile.Latitude) <= 20)
+        //                .ToList();
+
+        //        //profiles = profiles.Select(x => x).Where(t => t.Alternative == profile.Alternative &&
+        //        //                                              t.Blues == profile.Blues &&
+        //        //                                              t.ClassicRock == profile.ClassicRock &&
+        //        //                                              t.Grunge == profile.Grunge &&
+        //        //                                              t.Metal == profile.Metal &&
+        //        //                                              t.Pop == profile.Pop &&
+        //        //                                              t.PunkRock == profile.PunkRock &&
+        //        //                                              t.RAndB == profile.RAndB &&
+        //        //                                              t.Rock == profile.Rock).ToList();
+        //        profiles.Remove(profile);
+
+        //        List<InstructorViewModel> instructorNearby = new List<InstructorViewModel>();
+
+        //        profiles.ForEach(x => instructorNearby.Add(new InstructorViewModel
+        //        {
+        //            Image = x.MemberProfile.Image,
+        //            Content = x.Content,
+        //            UserName = x.MemberProfile.UserName,
+        //            Email = x.MemberProfile.Email,
+        //            ZipCode = x.MemberProfile.ZipCode,
+        //            UserId = x.Id
+        //        }));
+
+        //        return View(instructorNearby);
+        //    }
+
+        //    return View();
+        //}
+
     }
 }
 
 
 
-    
 
-    //public class InfoWindowModel
-    //{
-    //    public InfoWindowModel()
-    //    {
-    //        this.MaxWidth = 500;
-    //    }
-    //    public int MaxWidth { get; set; }
-    //    public bool DisableAutoPan { get; set; }
-    //    public bool OpenOnRightClick { get; set; }
-    //}
+
+
+
+
+
+
+
+
+
+
+
+//        public ActionResult FindInstructors()
+//        {
+//            ApplicationUser user =
+//                System.Web.HttpContext.Current.GetOwinContext()
+//                    .GetUserManager<ApplicationUserManager>()
+//                    .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+
+//            Instructor profile = db.Instructor.Select(x => x).FirstOrDefault(t => t.MemberProfile.Email == user.Email);
+
+//            List<Instructor> profiles = db.Instructor.Select(x => x).ToList();
+//            //profiles =
+//            //    profiles.Select(x => x)
+//            //        .Where(
+//            //            t =>
+//            //                profile != null &&
+//            //                DistanceFinder.FindDistanceBetweenCoordinates(profile.MemberProfile.Latitude,
+//            //                    profile.MemberProfile.Longitude, t.MemberProfile.Latitude,
+//            //                    t.MemberProfile.Longitude) <= 20)
+//            //        .ToList();
+//            //profile.NumberOfTabPosts = db.Tabulatures.Count(t => t.MemberProfile.Id == profile.Id);
+
+//            if (profile.NumberOfTabPosts < 5)
+//            {
+//                profiles.Remove(profile);
+//            }
+//            return View(profiles);
+//        }
+//        public ActionResult InfoWindow()
+//        {
+//            return View();
+//        }
+//    }
+//}
+
+
+
+
+
+//public class InfoWindowModel
+//{
+//    public InfoWindowModel()
+//    {
+//        this.MaxWidth = 500;
+//    }
+//    public int MaxWidth { get; set; }
+//    public bool DisableAutoPan { get; set; }
+//    public bool OpenOnRightClick { get; set; }
+//}
 
 
 

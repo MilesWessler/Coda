@@ -4,51 +4,36 @@
     ViewBag.Title = "Create";
 }
 
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <br/>
-    <br/>
-
     <h3>Are You Interested in Becoming an Instructor?</h3>
     <h5>Just Fill Out the Form Below...</h5>
-    <div class="form-horizontal" style="margin-top: 10%; margin-bottom: 30%">
-        
-
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+    <hr />
+    <div class="form-horizontal instructor-container">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.Label("Hourly Rate", htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PricePerHour, new {htmlAttributes = new {@class = "form-control", @style = "width: 125px;"}})
-                @Html.ValidationMessageFor(model => model.PricePerHour, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.PricePerHour, new { htmlAttributes = new { @class = "form-control", @placeholder = "Hourly Rate" } })
+                @Html.ValidationMessageFor(model => model.PricePerHour, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <br/>
-        <br/>
-        <br/>
-
         <div class="form-group">
-            @Html.Label("About Me", htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.Content, new
-                {
-                    style = "width: 669px; height: 292px; font-size: 22px; font-weight: bold; outline-color: black; border: 1px solid black;",
-                    placeholder = "Tell us about your experience as an instructor..."
-                })
+           {
+               @class = "instructor-aboutme",
+               placeholder = "Tell us about your experience as an instructor..."
+           })
             </div>
         </div>
-
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default"/>
+            <div class="col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

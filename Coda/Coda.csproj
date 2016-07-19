@@ -260,7 +260,7 @@
     <Compile Include="Controllers\CreateUserRolesController.cs" />
     <Compile Include="Controllers\FileTableController.cs" />
     <Compile Include="Controllers\InstructorsController.cs" />
-    <Compile Include="Controllers\MemberProfiles1Controller.cs" />
+    <Compile Include="Controllers\MemberProfilesController.cs" />
     <Compile Include="Controllers\PayPalController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Extensions\Extension.cs" />
@@ -303,7 +303,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\Configuration.cs" />
     <Compile Include="Utilities\DistanceFinder.cs" />
-    <Compile Include="ViewModels\InstructorViewModel.cs" />
+    <Compile Include="Models\InstructorViewModel.cs" />
     <Compile Include="ViewModels\TablatureWithRating.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +334,7 @@
     <Content Include="Images\coachella.jpg" />
     <Content Include="Images\coda1.jpg" />
     <Content Include="Images\concert1.jpg" />
+    <Content Include="Images\donations_logo.gif" />
     <Content Include="Images\drums.jpg" />
     <Content Include="Images\guitar.jpg" />
     <Content Include="Scripts\Blog\bootstrap.js" />
@@ -672,8 +673,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -702,7 +701,6 @@
     <Content Include="Views\Artists\Index.cshtml" />
     <Content Include="Views\Songs\Create.cshtml" />
     <Content Include="Views\Songs\Delete.cshtml" />
-    <Content Include="Views\Songs\Details.cshtml" />
     <Content Include="Views\Songs\Edit.cshtml" />
     <Content Include="Views\Songs\Index.cshtml" />
     <Content Include="Views\Tablatures\Delete.cshtml" />
@@ -714,25 +712,22 @@
     <Content Include="Views\CreateUserRoles\ManageUserRoles.cshtml" />
     <Content Include="Views\CreateUserRoles\Edit.cshtml" />
     <Content Include="Scripts\jquery-2.2.3.min.map" />
-    <Content Include="Views\MemberProfiles1\Create.cshtml" />
-    <Content Include="Views\MemberProfiles1\Delete.cshtml" />
-    <Content Include="Views\MemberProfiles1\Details.cshtml" />
-    <Content Include="Views\MemberProfiles1\Edit.cshtml" />
-    <Content Include="Views\MemberProfiles1\Index.cshtml" />
-    <Content Include="Views\MemberProfiles1\Connect.cshtml" />
+    <Content Include="Views\MemberProfiles\Create.cshtml" />
+    <Content Include="Views\MemberProfiles\Delete.cshtml" />
+    <Content Include="Views\MemberProfiles\Details.cshtml" />
+    <Content Include="Views\MemberProfiles\Edit.cshtml" />
+    <Content Include="Views\MemberProfiles\Index.cshtml" />
+    <Content Include="Views\MemberProfiles\Connect.cshtml" />
     <Content Include="Views\Tablatures\Top10.cshtml" />
     <Content Include="Views\Artists\SearchArtists.cshtml" />
     <Content Include="Views\Instructors\Delete.cshtml" />
     <Content Include="Views\Instructors\Details.cshtml" />
     <Content Include="Views\Instructors\Edit.cshtml" />
-    <Content Include="Views\Instructors\FindInstructors.cshtml" />
     <Content Include="Scripts\star-rating-master\bower.json" />
     <Content Include="Scripts\star-rating-master\package.json" />
     <Content Include="Scripts\star-rating-master\README.md" />
-    <Content Include="Views\Tablatures\FlagForRemoval.cshtml" />
     <Content Include="Views\Tablatures\TopRatedTabs.cshtml" />
     <Content Include="Views\Tablatures\FlaggedTabs.cshtml" />
-    <Content Include="Views\Home\Events.cshtml" />
     <Content Include="startbootstrap\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="startbootstrap\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="startbootstrap\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -773,27 +768,25 @@
     <Content Include="startbootstrap\sass\grayscale.scss" />
     <Content Include="startbootstrap\sass\_mixins.scss" />
     <Content Include="startbootstrap\sass\_variables.scss" />
-    <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Instructors\Index.cshtml" />
     <Content Include="Views\FileTable\Index.cshtml" />
-    <Content Include="Views\MemberProfiles1\_AddFile.cshtml" />
+    <Content Include="Views\MemberProfiles\_AddFile.cshtml" />
     <Content Include="Views\Instructors\Create.cshtml" />
     <Content Include="Views\BlogPosts\Create.cshtml" />
     <Content Include="Views\BlogPosts\Delete.cshtml" />
     <Content Include="Views\BlogPosts\Details.cshtml" />
     <Content Include="Views\BlogPosts\Edit.cshtml" />
     <Content Include="Views\BlogPosts\Index.cshtml" />
-    <Content Include="Views\Instructors\InfoWindow.cshtml" />
     <Content Include="startbootstrap\README.md" />
     <Content Include="Views\PayPal\Failure.cshtml" />
     <Content Include="Views\PayPal\Success.cshtml" />
     <Content Include="Views\PayPal\NewDonation.cshtml" />
     <Content Include="Views\PayPal\Donate.cshtml" />
     <Content Include="Views\PayPal\PreviousDonation.cshtml" />
+    <Content Include="Views\MemberProfiles\NoMembers.cshtml" />
     <None Include="Views\Shared\HomePageView.cshtml" />
     <Content Include="Views\Tablatures\_Rating.cshtml" />
     <Content Include="Views\Tablatures\_NewRating.cshtml" />
-    <Content Include="Views\Tablatures\Test.cshtml" />
     <Content Include="Views\Tablatures\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>

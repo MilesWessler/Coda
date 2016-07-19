@@ -4,22 +4,16 @@
     ViewBag.Title = "Delete";
 }
 
-
-<br />
-<br />
-
 <div>
+    <h4>
+        Are you sure you want to delete: <b style="color: red">@Html.DisplayFor(model => model.Title)?</b>
+    </h4>
 
-  
-        <h4 >
-            Are you sure you want to delete: <b style="color: red">@Html.DisplayFor(model => model.Title)?</b>
-        </h4>
+    <br />
+    <br />
 
-    <br/>
-    <br/>
-  
-
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

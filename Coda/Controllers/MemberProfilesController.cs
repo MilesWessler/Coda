@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Coda.Models;
+using Coda.Utilities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -7,22 +10,18 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Coda.Models;
-using Coda.Utilities;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using ZipCodeCoords;
 
 namespace Coda.Controllers
 {
-    public class MemberProfiles1Controller : Controller
+    public class MemberProfilesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-     
+
         public ActionResult Index(int? id)
         {
-           
+
             ApplicationUser user =
                System.Web.HttpContext.Current.GetOwinContext()
                    .GetUserManager<ApplicationUserManager>()
@@ -30,7 +29,7 @@ namespace Coda.Controllers
 
             MemberProfile profile = db.MemberProfiles.Select(x => x).FirstOrDefault(t => t.Email == user.Email);
 
-            if (profile.ConnectWithOtherMembers)
+            if (profile != null && profile.ConnectWithOtherMembers)
             {
                 List<MemberProfile> profiles = db.MemberProfiles.Select(x => x).ToList();
                 profiles =
@@ -65,10 +64,13 @@ namespace Coda.Controllers
                 return View(usersNearby);
             }
 
-            return View();
+            return View("NoMembers");
         }
 
-        
+        public ActionResult NoMembers()
+        {
+            return View();
+        }
 
         // GET: MemberProfiles1/Details/5
         public ActionResult Details(int? id)
@@ -137,7 +139,7 @@ namespace Coda.Controllers
                     db.MemberProfiles.Add(profileToAdd);
                     //db.MemberProfiles.Add(memberProfile);
                     db.SaveChanges();
-                    return RedirectToAction("Index", "Manage");
+                    return RedirectToAction("Index", "Home");
                 }
             }
 

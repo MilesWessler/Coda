@@ -2,24 +2,32 @@
 @{
     ViewBag.Title = "Donate";
 }
-<br/>
-<br/>
-<br/>
-<br />
 
-<h2>@ViewBag.Title</h2>
+
 <p class="text-success">@ViewBag.StatusMessage</p>
 @Html.AntiForgeryToken()
 
 <table class="table">
     <tr>
         <th>
-           Donation Amount
+           Donation Amount:
         </th>
-       <tr>
-        <td>
-            $@Html.DisplayFor(modelItem => modelItem.DonationAmount)
-        </td>
+
+    <td class="donation-amount-text">
+        $@Html.DisplayFor(modelItem => modelItem.DonationAmount)
+    </td>
+   
+    <td style="text-align: center;">
+        <br />
+        <br />
+        <br />
+        <br/>
+        <br />
+        <br/>
+
+        <img src="../../Images/donations_logo.gif"/>
+        <h3>Thank you for your support !</h3>
+    </td>
         <td>
             <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
                 <input type="hidden" name="cmd" value="_xclick">
@@ -37,11 +45,10 @@
                 <input type="hidden" class="btn btn-default" />
                 <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
                 <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-            </form>
+               </form>
         </td>
 </table>
 <div>
-
     <br />
 </div>
 <div class="form-group">

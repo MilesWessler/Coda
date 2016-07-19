@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Coda.Models
+namespace Coda.ViewModels
 {
-    public class UserViewModel
+    public class InstructorViewModel
     {
         public int UserId { get; set; }
         public string Email { get; set; }
@@ -14,7 +14,5 @@ namespace Coda.Models
         public string UserName { get; set; }
         public int ZipCode { get; set; }
         public byte[] Image { get; set; }
-        public int NumberOfPosts { get; set; }
-
     }
 }

@@ -5,7 +5,7 @@
 
 }
 
-<div align="center" style="margin-top: 5%; margin-bottom: 5%">
+<div class="quote">
     <h3>
         "Learn The Rules Like A <b style="color: lightcoral">Pro</b> So You Can Break Them Like An<b style="color: lightblue"> Artist</b>"
     </h3>
@@ -48,16 +48,23 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    }
-                    @Html.ActionLink("Songs", "Index", "Songs", new { id = item.Id }, null)
-                </td>
+
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <td>
+
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                        @Html.ActionLink("Songs", "Index", "Songs", new { id = item.Id }, null)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Songs", "Index", "Songs", new { id = item.Id }, null)
+                    </td>
+                }
             </tr>
         }
-
     </table>
 </div>

@@ -4,28 +4,28 @@
     ViewBag.Title = "NewDonation";
 }
 
-<br />
-<br/>
-<br />
-<br/>
 
+<div align="center">
+    <h3>
+        "Thank <b style="color: lightcoral">You</b> For Your<b style="color: lightblue"> Support</b>"
+    </h3>
+    <h5>The Coda Community</h5>
+</div>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Help Support the Coda Community</h4>
+
+    <div class="form-horizontal" style="margin-bottom: 20%">
+        <h4>Make A Donation Using PayPal</h4>
         <hr />
-      
+
         <div class="form-group">
-          <div class="col-md-10">
-               <label>Donation Amount: </label> @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", @placeholder = "Donation Amount" } })
                 @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />

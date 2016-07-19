@@ -1,7 +1,5 @@
 ﻿@model Coda.ViewModels.TablatureWithRating
 
-
-
     <link href="~/Content/bootstrap-rating.css" rel="stylesheet"/>
     <script src="~/Scripts/bootstrap-rating/bootstrap-rating.min.js"></script>
 @section scripts
@@ -31,9 +29,6 @@
         });
     </script>
 }
-
-
-
     <div id="container">
         @using (Ajax.BeginForm("_Rating", "Tablatures", null, new AjaxOptions
         {

@@ -1,17 +1,12 @@
 ﻿@model IEnumerable<Coda.Models.UserViewModel>
 
-<div style="margin-top: 10%; margin-bottom: 40%">
-
-
-    @*@if (!Model.Any())
-        {
-            <h2>You currently have no connections </h2>
-            <h4>Please be sure to fill out your <a href="@Url.Action("Create", "MemberProfiles1")">Member Profile</a> if you haven't already. Otherwise please be sure to check back soon!</h4>
-
-        }
-        else
-        {*@
-
+<div class="instructor-index-wrapper">
+    <div class="instructor-quote">
+        <h3>
+            "The best <b style="color: lightcoral">Instructors</b> Are Those Who Show You Where To<b style="color: lightblue"> Look</b> , <br /> But Don't Tell You What To See."
+        </h3>
+        <h5>Alexandra Trenfor</h5>
+    </div>
     @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
         <h2>Instructors Near You</h2>
@@ -19,6 +14,7 @@
 
         foreach (var item in Model)
         {
+
             if (item.Image != null)
             {
                 string imageBase64 = Convert.ToBase64String(item.Image);
@@ -27,18 +23,16 @@
                     <li>
                         <h2>@Html.DisplayFor(m => item.UserName)</h2>
                         <p>@Html.DisplayFor(m => item.Content)</p>
+
                     </li>
                     <li>
-                        <a href="@Url.Action("Details", "MemberProfiles1", new {id = item.UserId})"><img src="@imageSrc" class="top" style="width: 340px; height: 227px" /></a>
+                        <a href="@Url.Action("Details", "Instructors", new {id = item.UserId})"><img src="@imageSrc" class="top" style="width: 340px; height: 227px" /></a>
                     </li>
                 </ul>
             }
         }
     }
 </div>
-
-
-
 @section Styles {
     <link href="@Url.Content("~/Content/boxshadow.css")" rel="stylesheet" type="text/css" />
 }

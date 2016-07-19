@@ -4,18 +4,17 @@
     ViewBag.Title = "Index";
 }
 
-<div style="margin-top: 10%; margin-bottom: 5%">
+<div class="song-index-quote">
     <h3>"Your <b style="color: lightcoral">Heart</b> is Just a Beatbox for the <b style="color: lightblue">Song</b> of Life."</h3>
     <h5> Sandi Thom</h5>
 </div>
-<div >
+<div>
     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
     {
         <p>
             @Html.ActionLink("Create New", "Create")
         </p>
     }
-
     <table class="table">
         <tr>
             <th>
@@ -23,7 +22,6 @@
             </th>
             <th></th>
         </tr>
-
         @foreach (var item in Model)
         {
             <tr>
@@ -40,9 +38,15 @@
                             <li>
                                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                             </li>
+                            <li>
+                                @Html.ActionLink("Tabs", "Index", "Tablatures", new { id = item.Id }, null)
+                            </li>
                         </ul>
                     }
-                    @Html.ActionLink("Tabs", "Index", "Tablatures", new { id = item.Id }, null)
+                    else
+                    {
+                        @Html.ActionLink("Tabs", "Index", "Tablatures", new { id = item.Id }, null)
+                    }
                 </td>
             </tr>
         }
